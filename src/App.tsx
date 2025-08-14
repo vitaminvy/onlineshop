@@ -1,15 +1,32 @@
+// src/App.tsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from '@/components/layout/Navbar';
+import Home from '@/pages/Home';
+import Products from '@/pages/Products';
+import ProductDetail from '@/pages/ProductDetail';
+import Cart from '@/pages/Cart';
+
+/**
+ * Input: none
+ * Process: render fixed header + light base background
+ * Output: app shell in light mode
+ */
 export default function App() {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold text-blue-600">
-        🚀 TailwindCSS is working!
-      </h1>
-      <p className="mt-4 text-lg text-gray-700">
-        Nếu bạn thấy chữ này có màu và khoảng cách đẹp → Tailwind đã hoạt động.
-      </p>
-      <button className="mt-6 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
-        Click me
-      </button>
-    </div>
-  )
+    <BrowserRouter>
+      <Navbar />
+     
+<div className="h-[112px]" />
+      {/* spacer for fixed header */}
+      <div className="h-[96px]" />
+      <div className="min-h-[calc(100vh-96px)] bg-gray-50 text-gray-900">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/category/:slug" element={<Products />} />
+          <Route path="/product/:slug" element={<ProductDetail />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
