@@ -25,6 +25,8 @@ export type Product = {
   stock: number;        // units in stock
   specs: ProductSpecs;  // normalized specs map
   shortDesc?: string;   // optional short description
+  isFeatured?: boolean;
+
 };
 
 /**
