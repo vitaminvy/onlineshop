@@ -1,17 +1,15 @@
-import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Container from '@/components/layout/Container';
-import { getProductBySlug } from '@/lib/fetcher';
-import type { Product } from '@/type';
 import { formatCurrency } from '@/lib/format';
 import { useCart } from '@/store/cart';
+import useProduct from '@/hooks/useProduct';
 
 /**
  * Product detail view with sticky gallery and buy box.
  */
 export default function ProductDetail() {
   const { slug = '' } = useParams();
-  const [p, setP] = useState<Product | undefined>();
+  const { data: p, loading, error } = useProduct(slug);
   const add = useCart(s => s.addToCart);
 
   /**
@@ -19,17 +17,22 @@ export default function ProductDetail() {
    * Process: fetch product; toggle not found state
    * Output: detail layout with spec and add-to-cart
    */
-  useEffect(() => {
-    getProductBySlug(slug!).then(setP);
-  }, [slug]);
+ 
+  if (loading) {
+  return (
+    <Container>
+      <div className="py-10">Đang tải...</div>
+    </Container>
+  );
+}
 
-  if (!p) {
-    return (
-      <Container>
-        <div className="py-10">Không tìm thấy sản phẩm.</div>
-      </Container>
-    );
-  }
+if (error || !p) {
+  return (
+    <Container>
+      <div className="py-10">{error ?? 'Không tìm thấy sản phẩm.'}</div>
+    </Container>
+  );
+}
 
   return (
     <Container>
@@ -53,7 +56,7 @@ export default function ProductDetail() {
             />
             {/* Thumbnails (mock single for Day 1) */}
             <div className="mt-3 grid grid-cols-5 gap-2">
-              {p.images.map((src, i) => (
+              {p.images?.map((src, i) => (
                 <img key={i} src={src} className="aspect-square w-full rounded border object-cover" />
               ))}
             </div>
