@@ -71,6 +71,8 @@ export async function getFeaturedProducts() {
  */
 export async function getProductsByCategorySlug(catSlug: string) {
   await sleep();
+  if (!catSlug || catSlug === 'all') return DB;
+
   const cat = categories.find(c => c.slug === catSlug);
   return cat ? DB.filter(p => p.categoryId === cat.id) : [];
 }
