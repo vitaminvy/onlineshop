@@ -7,7 +7,9 @@
     "categoryId": "c1",
     "thumbnail": "https://via.placeholder.com/400x300?text=Arduino+Uno",
     "stock": 12,
-    "shortDesc": "Board phát triển phổ biến cho người mới bắt đầu."
+    "shortDesc": "Board phát triển phổ biến cho người mới bắt đầu.",
+    "isFeatured": true
+
   },
   {
     "id": "p2",
@@ -17,6 +19,7 @@
     "categoryId": "c2",
     "thumbnail": "https://via.placeholder.com/400x300?text=DHT11",
     "stock": 100,
-    "shortDesc": "Đo nhiệt độ và độ ẩm cơ bản."
+    "shortDesc": "Đo nhiệt độ và độ ẩm cơ bản.",
+    "isFeatured": true
   }
 ]
