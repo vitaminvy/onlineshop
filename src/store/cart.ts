@@ -30,6 +30,7 @@ export const useCart = create<CartState>((set, get) => ({
     if (idx >= 0) next[idx] = { ...next[idx], quantity: next[idx].quantity + qty };
     else next.push({ productId: product.id, quantity: qty });
     const totalQty = next.reduce((acc, it) => acc + it.quantity, 0);
+    
     set({ items: next, totalQty });
   },
 
