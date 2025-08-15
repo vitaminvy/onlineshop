@@ -1,9 +1,8 @@
 import Container from '@/components/layout/Container';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { getProducts } from '@/lib/fetcher';
 import { formatCurrency } from '@/lib/format';
 import type { Product } from '@/type';
+import { useFeaturedProducts } from '@/hooks'; // nếu không có barrel, dùng: '@/hooks/useProducts'
 
 /**
  * Home page showing a featured products grid (light mode).
@@ -11,47 +10,60 @@ import type { Product } from '@/type';
 export default function Home() {
   /**
    * Input: none
-   * Process: fetch products and pick the first 8 as "featured"
+   * Process: fetch featured products via hook; handle loading/error/empty states
    * Output: responsive product grid with links to detail pages
    */
-  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+  const { data: featuredProducts, loading, error } = useFeaturedProducts();
 
-  useEffect(() => {
-    getProducts().then((products) => {
-      // If you later add a flag (e.g., p.featured), filter here.
-      // For Day 1, just take the first 8 items.
-      setFeaturedProducts(products.slice(0, 8));
-    });
-  }, []);
+  if (loading) {
+    return (
+      <Container>
+        <div className="py-10">Đang tải...</div>
+      </Container>
+    );
+  }
+  if (error) {
+    return (
+      <Container>
+        <div className="py-10 text-red-600">{error}</div>
+      </Container>
+    );
+  }
 
   return (
     <Container>
-      <section className="py-10">
-        <h1 className="mb-6 text-3xl font-semibold">Featured Products</h1>
+      <section className="py-8">
+        <h2 className="mb-4 text-xl font-semibold">Sản phẩm nổi bật</h2>
 
-        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
-          {featuredProducts.map((p) => {
-            const img = p.thumbnail ?? p.images?.[0] ?? '';
-            return (
+        {!featuredProducts?.length ? (
+          <div className="text-gray-500">Chưa có sản phẩm nổi bật.</div>
+        ) : (
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            {featuredProducts.map((p: Product) => (
               <Link
                 key={p.id}
                 to={`/product/${p.slug}`}
-                className="block rounded-lg border border-gray-200 p-4 transition hover:shadow"
+                className="group block overflow-hidden rounded-lg border bg-white transition hover:shadow"
               >
-                <img
-                  src={img}
-                  alt={p.name}
-                  className="mb-3 h-40 w-full rounded-md object-cover"
-                />
-                <h2 className="line-clamp-2 text-sm font-medium">{p.name}</h2>
-                {p.brand && <p className="text-xs text-gray-500">{p.brand}</p>}
-                <p className="mt-1 font-semibold text-primary">
-                  {formatCurrency(p.price)}
-                </p>
+                <div className="aspect-[4/3] w-full overflow-hidden bg-gray-50">
+                  <img
+                    src={p.thumbnail}
+                    alt={p.name}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-3">
+                  <h3 className="line-clamp-1 text-sm font-medium text-gray-900">{p.name}</h3>
+                  <p className="text-xs text-gray-500">{p.brand}</p>
+                  <p className="text-base font-semibold text-emerald-600">
+                    {formatCurrency(p.price)}
+                  </p>
+                </div>
               </Link>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
     </Container>
   );
