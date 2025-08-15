@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useCart } from '@/store/cart';
 import SearchBar from '@/components/search/SearchBar';
+import clsx from "clsx";
 
 /**
  * Input: none
@@ -41,7 +42,7 @@ export default function Navbar() {
                 <path d="M20 20l-3.5-3.5" stroke="currentColor" strokeWidth="2" />
               </svg>
             </button>
-            
+
             {/* Cart */}
             <NavLink
               to="/cart"
@@ -103,14 +104,26 @@ export default function Navbar() {
                 <NavLink to="/category/ic" onClick={() => setMobileMenuOpen(false)}>
                   IC
                 </NavLink>
-                <NavLink to="/category/resistor" onClick={() => setMobileMenuOpen(false)}>
+                <NavLink to="/category/resistors" onClick={() => setMobileMenuOpen(false)}>
                   Resistors
                 </NavLink>
-                <NavLink to="/category/sensor" onClick={() => setMobileMenuOpen(false)}>
+                <NavLink to="/category/sensors" onClick={() => setMobileMenuOpen(false)}>
                   Sensors
                 </NavLink>
-                <NavLink to="/category/motor" onClick={() => setMobileMenuOpen(false)}>
+                <NavLink to="/category/motors" onClick={() => setMobileMenuOpen(false)}>
                   Motors
+                </NavLink>
+                <NavLink to="/category/leds" onClick={() => setMobileMenuOpen(false)}>
+                LEDs
+                </NavLink>
+                <NavLink to="/category/capacitors" onClick={() => setMobileMenuOpen(false)}>
+                Capacitors
+                </NavLink>
+                <NavLink to="/category/mcu" onClick={() => setMobileMenuOpen(false)}>
+                MCU Boards
+                </NavLink>
+                <NavLink to="/category/power" onClick={() => setMobileMenuOpen(false)}>
+                Power Modules
                 </NavLink>
                 <NavLink to="/category/all" onClick={() => setMobileMenuOpen(false)}>
                   All Products
@@ -137,19 +150,76 @@ export default function Navbar() {
       {/* Category rail: height -> h-12 (was h-10) for bigger tap targets */}
       <div className="w-full border-b bg-gray-50">
         <div className="mx-auto flex h-12 max-w-7xl items-center gap-5 overflow-x-auto px-4 text-sm text-gray-700 md:gap-7 md:overflow-visible">
-          <NavLink to="/category/ic" className="shrink-0">
+        <NavLink to="/category/ic" className={({ isActive }) =>
+            clsx(
+              "shrink-0",
+              isActive ? "text-primary font-semibold border-b-2 border-primary" : "hover:text-primary"
+            )
+          }>
             IC
           </NavLink>
-          <NavLink to="/category/resistor" className="shrink-0">
+        <NavLink to="/category/resistors" className={({ isActive }) =>
+            clsx(
+              "shrink-0",
+              isActive ? "text-primary font-semibold border-b-2 border-primary" : "hover:text-primary"
+            )
+          }>
             Resistors
           </NavLink>
-          <NavLink to="/category/sensor" className="shrink-0">
+        <NavLink to="/category/sensors" className={({ isActive }) =>
+            clsx(
+              "shrink-0",
+              isActive ? "text-primary font-semibold border-b-2 border-primary" : "hover:text-primary"
+            )
+          }>
             Sensors
           </NavLink>
-          <NavLink to="/category/motor" className="shrink-0">
+        <NavLink to="/category/motors" className={({ isActive }) =>
+            clsx(
+              "shrink-0",
+              isActive ? "text-primary font-semibold border-b-2 border-primary" : "hover:text-primary"
+            )
+          }>
             Motors
           </NavLink>
-          <NavLink to="/category/all" className="ml-auto hidden shrink-0 md:block">
+         <NavLink to="/category/leds" className={({ isActive }) =>
+            clsx(
+              "shrink-0",
+              isActive ? "text-primary font-semibold border-b-2 border-primary" : "hover:text-primary"
+            )
+          }>
+            LEDs
+            </NavLink>
+            <NavLink to="/category/capacitors" className={({ isActive }) =>
+            clsx(
+              "shrink-0",
+              isActive ? "text-primary font-semibold border-b-2 border-primary" : "hover:text-primary"
+            )
+          }>
+            Capacitors
+            </NavLink>
+        <NavLink to="/category/mcu" className={({ isActive }) =>
+            clsx(
+              "shrink-0",
+              isActive ? "text-primary font-semibold border-b-2 border-primary" : "hover:text-primary"
+            )
+          }>
+            MCU Boards
+        </NavLink>
+        <NavLink to="/category/power" className={({ isActive }) =>
+            clsx(
+              "shrink-0",
+              isActive ? "text-primary font-semibold border-b-2 border-primary" : "hover:text-primary"
+            )
+          }>
+            Power Modules
+            </NavLink>
+        <NavLink to="/category/all" className={({ isActive }) =>
+            clsx(
+              "ml-auto hidden shrink-0 md:block",
+              isActive ? "text-primary font-semibold border-b-2 border-primary" : "hover:text-primary"
+            )
+          }>
             All
           </NavLink>
         </div>
