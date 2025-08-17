@@ -38,7 +38,21 @@ export default function SearchPage() {
               <p className="text-xs text-gray-500">{p.brand}</p>
                {/* Stock line */}
                 {typeof p.stock === 'number' && (
-                    <p className="mt-0.5 text-xs text-gray-600">Stock: {p.stock}</p>
+                    p.stock === 0 ? (
+                      <span className="mt-1 inline-block rounded bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-600">
+                        Out of stock
+                      </span>
+                    ) :
+                      p.stock <= 5 ? (
+                        <span className="mt-1 inline-block rounded bg-amber-50 px-2 py-0.5 text-[11px] font-medium text-amber-700">
+                             Only {p.stock} left
+                         </span>
+                      ) : (
+
+                    <span className="mt-0.5 text-xs text-gray-600">
+                        Stock: {p.stock}
+                    </span>
+                      ) 
                 )}
               <p className="text-base font-semibold text-emerald-600">{formatCurrency(p.price)}</p>
             </div>

@@ -15,7 +15,7 @@ export const products: Product[] = [
     price: 9500,
     images: ['/img/ne555-1.jpg', '/img/ne555-2.jpg'],
     thumbnail: '/img/ne555-1.jpg',
-    stock: 120,
+    stock: 0,
     specs: { package: 'DIP-8', voltage: '4.5–16V' },
     shortDesc: 'Versatile timer for oscillators and PWM.',
     isFeatured: true, 

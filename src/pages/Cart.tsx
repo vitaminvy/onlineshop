@@ -182,11 +182,21 @@ export default function Cart() {
               </button>
               {typeof clearCart === 'function' && (
                 <button
-                onClick={() => clearCart()}
-                  className="mt-2 w-full rounded-md  bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600"
-
-                >
-                  Clear Cart
+                 onClick={() => {
+                  /**
+                   * Input: none
+                   * Process: clear cart store + remove checkout draft
+                   * Output: empty cart and no leftover form draft
+                   */
+                  clearCart();
+                  try { localStorage.removeItem('checkoutForm'); }
+                  // eslint-disable-next-line no-empty
+                   catch {}
+                }}
+                className="mt-2 w-full rounded-md bg-red-500 px-4 py-2 text-white hover:opacity-90"
+              >
+                Clear Cart
+                
                 </button>
               )}
                 
