@@ -6,6 +6,8 @@ import ProductDetail from '@/pages/ProductDetail';
 import Cart from '@/pages/Cart';
 import CategoryPage from '@/pages/CategoryPage';
 import SearchPage from '@/pages/SearchPage';
+import Checkout from '@/pages/Checkout';
+
 
 
 /**
@@ -28,6 +30,8 @@ export default function App() {
           <Route path="/product/:slug" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/checkout" element={<Checkout />} />
+
         </Routes>
       </div>
     </BrowserRouter>
