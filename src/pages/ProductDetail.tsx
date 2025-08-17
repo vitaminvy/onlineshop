@@ -77,7 +77,7 @@ if (error || !p) {
             </div>
             <div className="mt-1 text-sm">
               {p.stock > 0 ? (
-                <span className="rounded bg-green-50 px-2 py-0.5 text-green-700">In stock</span>
+                <span className="rounded bg-green-50 px-2 py-0.5 text-green-700">In stock • {p.stock} pcs</span>
               ) : (
                 <span className="rounded bg-gray-100 px-2 py-0.5 text-gray-600">Out of stock</span>
               )}
