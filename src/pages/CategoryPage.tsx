@@ -56,6 +56,12 @@ export default function CategoryPage() {
                 <div className="p-3">
                   <h3 className="line-clamp-1 text-sm font-medium text-gray-900">{p.name}</h3>
                   <p className="text-xs text-gray-500">{p.brand}</p>
+                  {/* Stock line */}
+                  {typeof p.stock === 'number' && (
+                    <p className="mt-0.5 text-xs text-gray-600">Stock: {p.stock}</p>
+                  )}
+
+        
                   <p className="text-base font-semibold text-emerald-600">
                     {formatCurrency(p.price)}
                   </p>
