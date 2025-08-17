@@ -1,5 +1,5 @@
 // src/pages/Cart.tsx
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Container from '@/components/layout/Container';
 import { useCart } from '@/store/cart';
 import { formatCurrency } from '@/lib/format';
@@ -12,6 +12,7 @@ import type { CartItem } from '@/type';
  * Output: cart list with basic summary and empty state
  */
 export default function Cart() {
+  const navigate = useNavigate();
   type ProductMeta = typeof SOURCE[number];
   type CartLine = { productId: string; qty: number; product?: ProductMeta };
 
@@ -24,6 +25,7 @@ export default function Cart() {
   // Read cart state (typed, no any)
   const items = useCart(s => ((s as { items?: CartItem[] }).items) ?? []);
   const removeFromCart = useCart(s => (s as { removeFromCart?: (id: string) => void }).removeFromCart);
+  const updateQty = useCart(s => (s as { updateQty?: (id: string, qty: number) => void }).updateQty);
   const clearCart = useCart(s => s.clearCart);
   /**
    * Input: cart item (possibly legacy shape)
@@ -59,12 +61,12 @@ export default function Cart() {
           <h1 className="text-xl font-semibold">Your Cart</h1>
           <p className="text-gray-600">Your cart is empty.</p>
           <div className="mt-4">
-            <Link
-              to="/"
-              className="inline-block rounded-md bg-primary px-4 py-2 text-white hover:opacity-90"
-            >
-              Continue Shopping
-            </Link>
+              <button
+                  onClick={() => navigate('/')}
+                  className="w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-center text-white hover:opacity-90"
+                  type="button">
+                  Continue Shopping
+              </button> 
           </div>
         </div>
       </Container>
@@ -100,8 +102,40 @@ export default function Cart() {
                   <div className="text-sm text-gray-500">
                     {formatCurrency(l.product?.price ?? 0)}
                   </div>
-                  <div className="text-sm">
-                    Qty: <span className="font-medium">{l.qty}</span>
+                  {typeof l.product?.stock === 'number' && (
+                  <div className="text-xs text-gray-500">Stock: {l.product?.stock}
+                  </div>
+  )}
+                    <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => updateQty?.(l.productId, Math.max(1, l.qty - 1))}
+                      className="h-8 w-8 rounded border bg-white text-sm hover:bg-gray-50"
+                      aria-label="Decrease quantity"
+                      type="button"
+                    >
+                      −
+                    </button>
+                    <input
+                      type="number"
+                      min={1}
+                      max={l.product?.stock ?? 9999}
+                      value={l.qty}
+                      onChange={(e) => {
+                        const v = parseInt(e.target.value || '0', 10);
+                        const next = Number.isNaN(v) ? 1 : Math.max(1, Math.min(v, l.product?.stock ?? 9999));
+                        updateQty?.(l.productId, next);
+                      }}
+                      className="h-8 w-14 rounded border px-2 text-center text-sm outline-none focus:border-primary"
+                      aria-label="Quantity"
+                    />
+                    <button
+                      onClick={() => updateQty?.(l.productId, Math.min(l.product?.stock ?? Infinity, l.qty + 1))}
+                      className="h-8 w-8 rounded border bg-white text-sm hover:bg-gray-50"
+                      aria-label="Increase quantity"
+                      type="button"
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
 
@@ -116,6 +150,15 @@ export default function Cart() {
                 )}
               </div>
             ))}
+           <div className="mt-4">
+               <button
+                    onClick={() => navigate('/')}
+                    className="w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-center text-white hover:opacity-90"
+                    type="button" 
+                    >
+                      Continue Shopping
+                </button>
+            </div>
           </div>
 
           {/* Summary */}
@@ -130,22 +173,23 @@ export default function Cart() {
                 <span>Subtotal</span>
                 <span className="font-semibold">{formatCurrency(subtotal)}</span>
               </div>
-              <button
-                className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-white hover:opacity-90 disabled:bg-primary disabled:text-white disabled:opacity-60 disabled:cursor-not-allowed"
-                disabled
-                title="Checkout flow will be implemented later"
+             <button
+                onClick={() => navigate('/checkout')}
+                className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-center text-white hover:opacity-90"
+                title="Go to Checkout"
               >
                 Checkout
               </button>
               {typeof clearCart === 'function' && (
                 <button
                 onClick={() => clearCart()}
-                  className="mt-2 w-full rounded-md border bg-white px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                  className="mt-2 w-full rounded-md  bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600"
 
                 >
                   Clear Cart
                 </button>
               )}
+                
             </div>
           </div>
         </div>
