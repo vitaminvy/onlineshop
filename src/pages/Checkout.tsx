@@ -203,7 +203,11 @@ export default function Checkout() {
           <div className="lg:col-span-5">
             <div className="rounded-lg border bg-white p-4">
               <h2 className="mb-3 text-lg font-semibold">Order Summary</h2>
-
+            <p className="mb-2 text-sm text-gray-600">
+                Items: <span className="font-medium">{items.reduce((a, it) => a + (it.quantity ?? it.quantity ?? 0), 0)}</span>
+                <span className="mx-2">•</span>
+                Subtotal: <span className="font-medium">{formatCurrency(subtotal)}</span>
+              </p>
               <div className="space-y-3">
                 {lines.map((l) => (
                   <div key={l.productId} className="flex items-start gap-3">
