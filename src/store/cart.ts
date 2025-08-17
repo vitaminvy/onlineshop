@@ -7,6 +7,7 @@ type CartState = {
   addToCart: (product: Product, qty?: number) => void;
   removeFromCart: (productId: ID) => void;
   clearCart: () => void;
+  updateQty: (productId: ID, qty: number) => void;
 };
 
 /**
@@ -50,5 +51,18 @@ export const useCart = create<CartState>((set, get) => ({
    * Process: reset items to empty; reset total to 0
    * Output: empty cart state
    */
-  clearCart: () => set({ items: [], totalQty: 0 })
+  clearCart: () => set({ items: [], totalQty: 0 }),
+    updateQty: (productId, qty) => set(state => {
+    // If qty <= 0, remove the item
+    if (qty <= 0) {
+      const items = state.items.filter(it => it.productId !== productId);
+      const totalQty = items.reduce((acc, it) => acc + it.quantity, 0);
+      return { items, totalQty };
+    }
+    // Otherwise update the quantity
+    const items = state.items.map(it => it.productId === productId ? { ...it, quantity: qty } : it);
+    const totalQty = items.reduce((acc, it) => acc + it.quantity, 0);
+    return { items, totalQty };
+  })
+
 }));
