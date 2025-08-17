@@ -1,12 +1,12 @@
 // src/pages/Checkout.tsx
-import { useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Container from '@/components/layout/Container';
 import { useCart } from '@/store/cart';
 import { products as SOURCE } from '@/data/products';
 import { formatCurrency } from '@/lib/format';
 import { useForm } from 'react-hook-form';
-
+import { toast } from 'sonner';
 /**
  * Checkout page: shipping form + order summary
  *
@@ -58,18 +58,42 @@ export default function Checkout() {
     note?: string;
   };
 
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>();
+  const { register, handleSubmit, formState: { errors, isSubmitting }, reset, watch } = useForm<FormData>({
+  defaultValues: { fullName: '', email: '', phone: '', address: '', note: '' }
+});
+  // Load draft from localStorage on mount
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('checkoutForm');
+      if (raw) reset(JSON.parse(raw));
+    } catch { /* ignore */ }
+  }, [reset]);
 
+  // Auto-save form changes to localStorage
+  useEffect(() => {
+    const sub = watch((values) => {
+      try {
+        localStorage.setItem('checkoutForm', JSON.stringify(values));
+      } catch { /* ignore */ }
+    });
+    return () => sub.unsubscribe();
+  }, [watch]);
   /**
    * Input: valid form values
    * Process: (mock) send order, clear cart, navigate to home
    * Output: redirect to home with simple alert
    */
-  const onSubmit = async (values: FormData) => {
+  const onSubmit = async () => {    // Validate stock before placing order
+    const over = lines.filter(l => typeof l.product?.stock === 'number' && l.qty > (l.product?.stock ?? 0));
+    if (over.length) {
+        toast.error('Some items exceed available stock. Please adjust quantities in your cart.');
+        return;
+    }
     // mock submit
     await new Promise(r => setTimeout(r, 400));
+    toast.success(`Order placed! Total: ${formatCurrency(subtotal)}`);
+    localStorage.removeItem('checkoutForm');
      
-    alert(`Order placed!\n\nName: ${values.fullName}\nTotal: ${formatCurrency(subtotal)}`);
     clearCart?.();
     navigate('/');
   };
@@ -81,9 +105,10 @@ export default function Checkout() {
           <h1 className="text-xl font-semibold">Checkout</h1>
           <p className="text-gray-600">Your cart is empty.</p>
           <div className="mt-4">
-            <Link to="/" className="inline-block rounded-md bg-primary px-4 py-2 text-white hover:opacity-90">
-              Continue Shopping
-            </Link>
+            <button
+              onClick={() => navigate('/')}
+              className="inline-block rounded-md bg-primary px-4 py-2 text-white hover:opacity-90"
+            >Continue Shopping</button>
           </div>
         </div>
       </Container>
@@ -115,7 +140,13 @@ export default function Checkout() {
                 <label className="block text-sm font-medium">Email</label>
                 <input
                   type="email"
-                  {...register('email', { required: 'Email is required' })}
+                     {...register('email', {
+                    required: 'Email is required',
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: 'Invalid email',
+                    },
+                  })}
                   className="mt-1 w-full rounded-md border px-3 py-2 outline-none focus:border-primary"
                   placeholder="you@example.com"
                 />
@@ -124,9 +155,15 @@ export default function Checkout() {
               <div>
                 <label className="block text-sm font-medium">Phone</label>
                 <input
-                  {...register('phone', { required: 'Phone is required' })}
-                  className="mt-1 w-full rounded-md border px-3 py-2 outline-none focus:border-primary"
-                  placeholder="0901234567"
+                    {...register('phone', {
+                    required: 'Phone is required',
+                    pattern: {
+                      value: /^[0-9+\-\s]{8,}$/,
+                      message: 'Invalid phone',
+                    },
+                    })}
+                    className="mt-1 w-full rounded-md border px-3 py-2 outline-none focus:border-primary"
+                    placeholder="0901234567"
                 />
                 {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>}
               </div>
@@ -206,12 +243,13 @@ export default function Checkout() {
                   <span className="font-bold text-primary">{formatCurrency(subtotal)}</span>
                 </div>
 
-                <Link
-                  to="/cart"
-                  className="mt-4 inline-block rounded-md border bg-white px-4 py-2 text-sm hover:bg-gray-50"
+                    <button onClick={() => navigate('/cart')}
+                         className="mt-4 inline-block rounded-md border bg-white px-4 py-2 text-sm hover:bg-gray-50"
+                         type="button"
                 >
-                  Back to Cart
-                </Link>
+                             Back to Cart
+                    </button>
+               
               </div>
             </div>
           </div>
