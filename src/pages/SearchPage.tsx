@@ -3,6 +3,7 @@ import Container from '@/components/layout/Container';
 import useSearchProducts from '@/hooks/useSearchProducts';
 import { formatCurrency } from '@/lib/format';
 import { useState } from 'react';
+import Spinner from '@/components/ui/Spinner';
 
 /**
  * Input: product list and sort key
@@ -31,6 +32,7 @@ function applySort<T extends { price: number; createdAt?: number }>(list: T[], s
 function applyPriceFilter<T extends { price: number }>(list: T[], minStr: string | null, maxStr: string | null) {
   const min = minStr ? Number(minStr) : -Infinity;
   const max = maxStr ? Number(maxStr) : Infinity;
+  
   return list.filter(p => p.price >= min && p.price <= max);
 }
 /**
@@ -75,18 +77,23 @@ function PriceFilter() {
   const [params, setParams] = useSearchParams();
   const [min, setMin] = useState(params.get('min') ?? '');
   const [max, setMax] = useState(params.get('max') ?? '');
+  const [applying, setApplying] = useState(false);
 
   /**
    * Input: local min/max
    * Process: write query params and reset page to 1
    * Output: URL reflects filter; list re-renders
    */
-  const apply = () => {
-    if (min) params.set('min', min); else params.delete('min');
-    if (max) params.set('max', max); else params.delete('max');
-    params.set('page', '1');
-    setParams(params, { replace: true });
-  };
+  const apply = () => 
+    {
+        setApplying(true);
+        if (min) params.set('min', min); else params.delete('min');
+        if (max) params.set('max', max); else params.delete('max');
+        params.set('page', '1');
+        setParams(params, { replace: true });
+        // Small timeout just to show feedback; remove if không cần
+        setTimeout(() => setApplying(false), 150);
+    };
 
   return (
     <div className="flex items-center gap-2 text-sm">
@@ -109,9 +116,11 @@ function PriceFilter() {
       <button
         type="button"
         onClick={apply}
-        className="rounded-md bg-primary px-3 py-1 text-white hover:opacity-90"
-      >
-        Apply
+        disabled={applying}
+        className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-1 text-white hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+       >
+         {applying && <Spinner />}
+         Apply
       </button>
     </div>
   );
@@ -180,10 +189,35 @@ export default function SearchPage() {
           <SortSelect />
         </div>
       </div>
-      {loading && <div>Loading...</div>}
+      {loading && (
+          <div className="rounded-lg border bg-white p-8 text-center text-gray-600">
+            <Spinner className="mr-2" />
+            <span className="align-middle">Loading results…</span>
+          </div>
+      )}  
       {!loading && filtered.length === 0 ? (
-        <div className="rounded-lg border bg-white p-8 text-center text-gray-600">
-          No products found.
+        <div className="rounded-lg border bg-white p-10 text-center">
+          {/* Illustration icon */}
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gray-100">
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 20l-3.5-3.5" stroke="currentColor" strokeWidth="2" fill="none" />
+              <circle cx="11" cy="11" r="6" stroke="currentColor" strokeWidth="2" fill="none" />
+            </svg>
+          </div>
+          <div className="text-lg font-medium text-ink">No products found</div>
+          <p className="mt-1 text-sm text-gray-600">Try adjusting filters or search terms.</p>
+
+          <Link
+            to="/category/all"  
+            className="inline-flex items-center gap-2 rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-ink transition hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+          > 
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M10 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M3 12h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Continue Shopping
+          </Link>
+          
         </div>
       ) : (
         <>
