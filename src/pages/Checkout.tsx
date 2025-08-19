@@ -61,6 +61,18 @@ export default function Checkout() {
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset, watch } = useForm<FormData>({
   defaultValues: { fullName: '', email: '', phone: '', address: '', note: '' }
 });
+/**
+   * Input: none
+   * Process: entering Checkout starts a new order; remove previous snapshot
+   * Output: clean 'lastOrder' in localStorage
+   */
+  useEffect(() => {
+    try {
+      localStorage.removeItem('lastOrder');
+    } catch (e) {
+      void e; // ignore error
+    }
+  }, []);
   // Load draft from localStorage on mount
   useEffect(() => {
     try {
@@ -83,7 +95,7 @@ export default function Checkout() {
    * Process: (mock) send order, clear cart, navigate to home
    * Output: redirect to home with simple alert
    */
-  const onSubmit = async () => {    // Validate stock before placing order
+  const onSubmit = async (data: FormData) => {    // Validate stock before placing order
     const over = lines.filter(l => typeof l.product?.stock === 'number' && l.qty > (l.product?.stock ?? 0));
     if (over.length) {
         toast.error('Some items exceed available stock. Please adjust quantities in your cart.');
@@ -91,11 +103,34 @@ export default function Checkout() {
     }
     // mock submit
     await new Promise(r => setTimeout(r, 400));
+      // Build order snapshot and persist
+    const order = {
+      id: `ORD-${Date.now()}`,
+      createdAt: new Date().toISOString(),
+      subtotal,
+      items: lines.map(l => ({
+        id: l.productId,
+        name: l.product?.name ?? l.productId,
+        qty: l.qty,
+        price: l.product?.price ?? 0,
+      })),
+      customer: {
+        fullName: data.fullName,
+        email: data.email,
+        phone: data.phone,
+        address: data.address,
+      },
+    };
+       // eslint-disable-next-line @typescript-eslint/no-unused-vars
+       try { localStorage.setItem('lastOrder', JSON.stringify(order)); } catch (e) {
+      // ignore persist errors (e.g., storage quota or private mode)
+    }
+
     toast.success(`Order placed! Total: ${formatCurrency(subtotal)}`);
     localStorage.removeItem('checkoutForm');
      
     clearCart?.();
-    navigate('/');
+    navigate('/order-success');
   };
 
   if (!lines.length) {
@@ -203,8 +238,8 @@ export default function Checkout() {
           <div className="lg:col-span-5">
             <div className="rounded-lg border bg-white p-4">
               <h2 className="mb-3 text-lg font-semibold">Order Summary</h2>
-            <p className="mb-2 text-sm text-gray-600">
-                Items: <span className="font-medium">{items.reduce((a, it) => a + (it.quantity ?? it.quantity ?? 0), 0)}</span>
+           <p className="mb-2 text-sm text-gray-600">
+                Items: <span className="font-medium">{lines.reduce((a, l) => a + l.qty, 0)}</span>
                 <span className="mx-2">•</span>
                 Subtotal: <span className="font-medium">{formatCurrency(subtotal)}</span>
               </p>
