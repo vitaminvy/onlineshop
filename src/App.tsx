@@ -8,6 +8,7 @@ import CategoryPage from '@/pages/CategoryPage';
 import SearchPage from '@/pages/SearchPage';
 import Checkout from '@/pages/Checkout';
 import { Toaster } from 'sonner';
+import OrderSuccess from '@/pages/OrderSuccess';
 
 
 
@@ -22,7 +23,6 @@ export default function App() {
           <Toaster richColors position="top-center" />
       <Navbar />
      
-<div/>
       {/* spacer for fixed header */}
       <div className="h-[101px]" />
       <div className="min-h-[calc(100vh-96px)] bg-gray-50 text-gray-900">
@@ -33,7 +33,7 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/checkout" element={<Checkout />} />
-          
+          <Route path="/order-success" element={<OrderSuccess />} />
 
         </Routes>
       </div>
