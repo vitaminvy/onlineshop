@@ -61,6 +61,9 @@ export default function Navbar() {
               <NavLink to="/category/all" className="rounded-md px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 Products
               </NavLink>
+              <NavLink to="/orders" className="rounded-md px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                Orders
+              </NavLink>
               <NavLink to="/login" className="rounded-md px-3 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 Sign in
               </NavLink>
@@ -128,7 +131,17 @@ export default function Navbar() {
                 <NavLink to="/category/all" onClick={() => setMobileMenuOpen(false)}>
                   All Products
                 </NavLink>
-
+                <NavLink
+                  to="/orders"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "rounded-md px-3 py-2 text-sm text-primary font-semibold border-b-2 border-primary"
+                      : "rounded-md px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  }
+                >
+                  Orders
+                </NavLink>
+               
                 <div className="mt-2 border-t pt-2">
                   <NavLink to="/login" onClick={() => setMobileMenuOpen(false)}>
                     Sign in

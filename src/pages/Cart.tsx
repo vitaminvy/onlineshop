@@ -5,6 +5,8 @@ import { useCart } from '@/store/cart';
 import { formatCurrency } from '@/lib/format';
 import { products as SOURCE } from '@/data/products';
 import type { CartItem } from '@/type';
+import { toast } from 'sonner';
+import { useState } from 'react';
 
 /**
  * Input: cart store
@@ -13,6 +15,8 @@ import type { CartItem } from '@/type';
  */
 export default function Cart() {
   const navigate = useNavigate();
+  // Local draft for typing large numbers without being reset by controlled value
+  const [draftQty, setDraftQty] = useState<Record<string, string>>({});
   type ProductMeta = typeof SOURCE[number];
   type CartLine = { productId: string; qty: number; product?: ProductMeta };
 
@@ -54,21 +58,30 @@ export default function Cart() {
   );
 
   // Empty state
-  if (!lines.length) {
+  if (lines.length === 0) { 
     return (
       <Container>
-        <div className="py-10">
-          <h1 className="text-xl font-semibold">Your Cart</h1>
-          <p className="text-gray-600">Your cart is empty.</p>
-          <div className="mt-4">
-              <button
-                  onClick={() => navigate('/')}
-                  className="w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-center text-white hover:opacity-90"
-                  type="button">
-                  Continue Shopping
-              </button> 
-          </div>
-        </div>
+       <div className="rounded-lg border bg-white p-10 text-center">
+  {/* Icon minh hoạ */}
+  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gray-100">
+    <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M6 6h15l-1.5 9h-12L6 6Z" stroke="currentColor" strokeWidth="2" fill="none"/>
+      <path d="M6 6L5 3H2" stroke="currentColor" strokeWidth="2" fill="none"/>
+      <circle cx="9" cy="20" r="1.5" fill="currentColor"/>
+      <circle cx="18" cy="20" r="1.5" fill="currentColor"/>
+    </svg>
+  </div>
+  <div className="text-lg font-medium text-ink">Your cart is empty</div>
+  <p className="mt-1 text-sm text-gray-600">Browse products and add items to your cart.</p>
+
+  <Link
+    to="/category/all"
+    className="mt-6 inline-flex rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:opacity-90"
+    onClick={() => { try { localStorage.removeItem('lastOrder'); } catch { /* empty */ } }}
+  >
+    Browse Products
+  </Link>
+</div>
       </Container>
     );
   }
@@ -108,7 +121,26 @@ export default function Cart() {
   )}
                     <div className="flex items-center gap-2">
                     <button
-                      onClick={() => updateQty?.(l.productId, Math.max(1, l.qty - 1))}
+                      onClick={() => {
+                        /**
+                         * Input: current line qty
+                         * Process: decrement; if next <= 0 remove item; else update qty
+                         * Output: updated cart or removed line with toast
+                         */
+                        const next = l.qty - 1;
+                        if (next <= 0) {
+                          removeFromCart?.(l.productId);
+                          toast.success(`Removed “${l.product?.name ?? 'Item'}”`);
+                        } else {
+                          updateQty?.(l.productId, next);
+                        }
+                        setDraftQty(prev => {
+                          
+                          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                          const { [l.productId]: _removed, ...rest } = prev;
+                          return rest;
+                        });
+                      }}
                       className="h-8 w-8 rounded border bg-white text-sm hover:bg-gray-50"
                       aria-label="Decrease quantity"
                       type="button"
@@ -116,21 +148,67 @@ export default function Cart() {
                       −
                     </button>
                     <input
-                      type="number"
-                      min={1}
                       max={l.product?.stock ?? 9999}
-                      value={l.qty}
+                      value={draftQty[l.productId] ?? String(l.qty)}
                       onChange={(e) => {
-                        const v = parseInt(e.target.value || '0', 10);
-                        const next = Number.isNaN(v) ? 1 : Math.max(1, Math.min(v, l.product?.stock ?? 9999));
+                        /**
+                         * Input: user-typed value (may be empty while composing)
+                         * Process: store to local draft without mutating cart yet
+                         * Output: draft reflects what's typed; commit on blur
+                         */
+                        setDraftQty(prev => ({ ...prev, [l.productId]: e.target.value }));
+                      }}
+                      onBlur={(e) => {
+                        /**
+                         * Input: draft value on blur
+                         * Process: if empty -> revert; if <=0 -> remove; else clamp to stock and update
+                         * Output: committed cart quantity or removed line; clears draft
+                         */
+                        const raw = (e.target.value ?? '').trim();
+                        const stock = l.product?.stock ?? Number.POSITIVE_INFINITY;
+                        // Clear draft helper
+                        const clearDraft = () =>
+                          setDraftQty(prev => {
+                            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                            const { [l.productId]: _, ...rest } = prev;
+                            return rest;
+                          });
+
+                        if (raw === '') {
+                          // Revert to current cart value on empty
+                          clearDraft();
+                          return;
+                        }
+                        const v = Number(raw);
+                        if (!Number.isFinite(v)) {
+                          clearDraft();
+                          return;
+                        }
+                        if (v <= 0) {
+                          removeFromCart?.(l.productId);
+                          toast.success(`Removed “${l.product?.name ?? 'Item'}”`);
+                          clearDraft();
+                          return;
+                        }
+                        const next = Math.min(v, stock === Infinity ? v : stock);
                         updateQty?.(l.productId, next);
+                        clearDraft();
                       }}
                       className="h-8 w-14 rounded border px-2 text-center text-sm outline-none focus:border-primary"
                       aria-label="Quantity"
                     />
                     <button
-                      onClick={() => updateQty?.(l.productId, Math.min(l.product?.stock ?? Infinity, l.qty + 1))}
-                      className="h-8 w-8 rounded border bg-white text-sm hover:bg-gray-50"
+                      onClick={() => {
+                        updateQty?.(l.productId, Math.min(l.product?.stock ?? Infinity, l.qty + 1));
+                        setDraftQty(prev => {
+                          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                          const { [l.productId]: _, ...rest } = prev;
+                          return rest;
+                        });
+                      }}
+                      disabled={(l.product?.stock ?? Number.POSITIVE_INFINITY) <= l.qty}
+                      aria-disabled={(l.product?.stock ?? Number.POSITIVE_INFINITY) <= l.qty}
+                      className="h-8 w-8 rounded border bg-white text-sm hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
                       aria-label="Increase quantity"
                       type="button"
                     >
@@ -141,7 +219,10 @@ export default function Cart() {
 
                 {typeof removeFromCart === 'function' && (
                   <button
-                    onClick={() => removeFromCart(l.productId)}
+                    onClick={() => {
+                      removeFromCart(l.productId);
+                      toast.success(`Removed “${l.product?.name ?? 'Item'}”`);
+                    }}
                     className="rounded-md border bg-white px-3 py-1 text-sm text-gray-700 hover:bg-gray-50"
                     title="Remove"
                   >
@@ -152,7 +233,7 @@ export default function Cart() {
             ))}
            <div className="mt-4">
                <button
-                    onClick={() => navigate('/')}
+                    onClick={() => navigate('/category/all')}
                     className="w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-center text-white hover:opacity-90"
                     type="button" 
                     >
@@ -189,9 +270,13 @@ export default function Cart() {
                    * Output: empty cart and no leftover form draft
                    */
                   clearCart();
-                  try { localStorage.removeItem('checkoutForm'); }
+                  try { localStorage.removeItem('checkoutForm'); 
+                        localStorage.removeItem('lastOrder');
+                  }
+                  
                   // eslint-disable-next-line no-empty
                    catch {}
+                   toast.success('Cart cleared');
                 }}
                 className="mt-2 w-full rounded-md bg-red-500 px-4 py-2 text-white hover:opacity-90"
               >
