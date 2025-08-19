@@ -121,10 +121,29 @@ export default function Checkout() {
         address: data.address,
       },
     };
-       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-       try { localStorage.setItem('lastOrder', JSON.stringify(order)); } catch (e) {
-      // ignore persist errors (e.g., storage quota or private mode)
-    }
+              /**
+   * Input: current order object
+   * Process: append to 'orders' list in localStorage (history)
+   * Output: persisted order history
+   */
+  type OrderSnapshot = {
+    id: string;
+    createdAt: string;
+    subtotal: number;
+    items: Array<{ id: string; name: string; qty: number; price: number }>;
+    customer?: { fullName: string; email: string; phone: string; address: string };
+  };
+  try {
+    const rawList = localStorage.getItem('orders');
+    const list: OrderSnapshot[] = rawList ? (JSON.parse(rawList) as OrderSnapshot[]) : [];
+    // Prevent duplicate by id (re-submit)
+    if (!list.some(o => o.id === order.id)) list.unshift(order);
+    localStorage.setItem('orders', JSON.stringify(list));
+  } catch (e) {
+    // ignore persist errors (e.g., storage quota or private mode)
+    void e;
+  }
+    
 
     toast.success(`Order placed! Total: ${formatCurrency(subtotal)}`);
     localStorage.removeItem('checkoutForm');
