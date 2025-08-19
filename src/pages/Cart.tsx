@@ -189,7 +189,10 @@ export default function Cart() {
                    * Output: empty cart and no leftover form draft
                    */
                   clearCart();
-                  try { localStorage.removeItem('checkoutForm'); }
+                  try { localStorage.removeItem('checkoutForm'); 
+                        localStorage.removeItem('lastOrder');
+                  }
+                  
                   // eslint-disable-next-line no-empty
                    catch {}
                 }}
