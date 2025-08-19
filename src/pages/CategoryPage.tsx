@@ -208,8 +208,31 @@ export default function CategoryPage() {
         </div>
         
         {filtered.length === 0 ? (
-          <div className="text-gray-500">No products found in this category.</div>
-        ) : (
+  <div className="rounded-lg border bg-white p-10 text-center">
+    {/* Illustration icon */}
+    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gray-100">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20 20l-3.5-3.5" stroke="currentColor" strokeWidth="2" fill="none" />
+        <circle cx="11" cy="11" r="6" stroke="currentColor" strokeWidth="2" fill="none" />
+      </svg>
+    </div>
+    <div className="text-lg font-medium text-ink">No products in this category</div>
+    <p className="mt-1 text-sm text-gray-600">Try another category or browse all products.</p>
+
+    <Link
+      to="/category/all"
+      className="mt-6 inline-flex items-center gap-2 rounded-md border px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-50"
+    >
+      {/* back-style icon */}
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+           fill="none" stroke="currentColor" strokeWidth="2"
+           viewBox="0 0 24 24" className="h-4 w-4">
+        <path d="M5 12h14M12 5l-7 7 7 7" />
+      </svg>
+      Continue Shopping
+    </Link>
+  </div>
+) : (
         <>
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {paged.map(p => (
