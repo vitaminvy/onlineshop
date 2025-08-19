@@ -4,6 +4,8 @@ import useSearchProducts from '@/hooks/useSearchProducts';
 import { formatCurrency } from '@/lib/format';
 import { useState } from 'react';
 import Spinner from '@/components/ui/Spinner';
+import { useWishlist } from '@/store/wishlist';
+import { toast } from 'sonner';
 
 /**
  * Input: product list and sort key
@@ -166,6 +168,7 @@ export default function SearchPage() {
   const { data, loading } = useSearchProducts(q);
   const sort = params.get('sort') ?? 'relevance';
   const sorted = applySort(data, sort);
+  const wish = useWishlist();
 
   // Price filter
   const minQ = params.get('min');
@@ -226,7 +229,7 @@ export default function SearchPage() {
             <Link
               key={p.id}
               to={`/product/${p.slug}`}
-              className="group block overflow-hidden rounded-lg border bg-white transition hover:shadow"
+              className="group relative block overflow-hidden rounded-lg border bg-white transition hover:shadow"
             >
               {/* Image: use thumbnail fallback to first image */}
               <div className="aspect-[4/3] w-full overflow-hidden bg-gray-50">
@@ -240,7 +243,42 @@ export default function SearchPage() {
 
               {/* Text info */}
               <div className="p-3">
-                <h3 className="line-clamp-1 text-sm font-medium text-gray-900">{p.name}</h3>
+                <div className="mb-1 flex items-center justify-between gap-2">
+                  <h3 className="line-clamp-1 text-sm font-medium text-gray-900">{p.name}</h3>
+                  <button
+                    type="button"
+                    aria-label={wish.has(p.id) ? 'Remove from wishlist' : 'Add to wishlist'}
+                    aria-pressed={wish.has(p.id)}
+                    title={wish.has(p.id) ? 'Remove from wishlist' : 'Add to wishlist'}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const wasLiked = wish.has(p.id);
+                      wish.toggle(p.id);
+                      toast.success(wasLiked ? 'Removed from wishlist' : 'Added to wishlist');
+                    }}
+                    className="shrink-0 inline-flex items-center justify-center p-1 bg-transparent hover:bg-transparent focus:bg-transparent border-0 outline-none ring-0 appearance-none"
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      className="transition-colors"
+                      fill={wish.has(p.id) ? '#ef4444' : 'none'}
+                      stroke={wish.has(p.id) ? '#ef4444' : 'currentColor'}
+                      strokeWidth="2"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M12 21s-1.45-1.3-3.1-2.82C6.3 16.84 4 14.78 4 12.2 4 10.02 5.8 8.2 8 8.2c1.3 0 2.6.64 3.4 1.66.8-1.02 2.1-1.66 3.4-1.66 2.2 0 4 1.82 4 4 0 2.58-2.3 4.64-4.9 6-1.65 1.52-3.1 2.8-3.1 2.8z"
+                        fillRule="evenodd"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
                 <p className="text-xs text-gray-500">{p.brand}</p>
                 {/* Stock line */}
                 {typeof p.stock === 'number' && (
