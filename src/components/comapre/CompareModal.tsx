@@ -1,9 +1,11 @@
 // src/components/comapre/CompareModal.tsx
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCompare } from '@/store/compare';
 import type { Product } from '@/type';
 import { products as SOURCE } from '@/data/products';
+// Add: mock fetcher for compare
+import { getCompare } from '@/lib/fetcher';
 
 /**
  * Compare modal UI.
@@ -17,6 +19,23 @@ export default function CompareModal({ open, onClose }: PropsWithChildren<Props>
   const ids = useCompare(s => s.ids);
   const remove = useCompare(s => s.remove);
   const clear = useCompare(s => s.clear);
+
+  /**
+   * Input: none
+   * Process: fetch mock products for current compare ids via getCompare()
+   * Output: set local 'fetched' for quick verification/logging
+   */
+  const [fetched, setFetched] = useState<null | Product[]>(null);
+
+  async function handleFetchMock() {
+    try {
+      const data = await getCompare(ids);
+      setFetched(data);
+      console.log('[Mock Fetch] compare data:', data);
+    } catch (e) {
+      console.error('[Mock Fetch] failed:', e);
+    }
+  }
 
   // Resolve selected products
   const items: Product[] = ids
@@ -41,6 +60,13 @@ export default function CompareModal({ open, onClose }: PropsWithChildren<Props>
             >
               + Add product
             </Link>
+            <button
+              type="button"
+              onClick={handleFetchMock}
+              className="rounded-md border border-blue-500 bg-white px-3 py-2 text-xs font-medium text-blue-600 hover:opacity-90"
+            >
+              Fetch mock
+            </button>
             <button
               onClick={onClose}
               aria-label="Close"
@@ -90,6 +116,13 @@ export default function CompareModal({ open, onClose }: PropsWithChildren<Props>
               </tbody>
             </table>
           </div>
+        )}
+
+        {/* Debug: show count of fetched items from mock API */}
+        {fetched && (
+          <p className="mt-2 text-xs text-gray-500">
+            Mock fetched: <span className="font-medium">{fetched.length}</span> item(s)
+          </p>
         )}
 
         {items.length > 0 && (
