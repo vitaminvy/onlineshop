@@ -7,7 +7,8 @@ import type { Product } from '@/type';
  * Process: Fetch all products on mount; manage loading and error states
  * Output: { data: Product[]; loading: boolean; error?: string }
  */
-export function useProducts() {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function useProducts(_p0?: { mode: string; }) {
   const [data, setData] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>();
