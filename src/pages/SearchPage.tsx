@@ -1,13 +1,16 @@
 import { useSearchParams, Link } from "react-router-dom";
 import Container from "@/components/layout/Container";
-import useSearchProducts from "@/hooks/useSearchProducts";
+// Remove useSearchProducts import
 import { formatCurrency } from "@/lib/format";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "@/components/ui/Spinner";
 import { useWishlist } from "@/store/wishlist";
 import { toast } from "sonner";
 import { useCompare } from "@/store/compare";
-import { products as SOURCE } from "@/data/products";
+// Remove in-memory products source import
+import { useProducts } from "@/hooks/useProducts";
+import { useCompareProducts } from "@/hooks/useCompareProducts";
+import { getProducts } from "@/lib/fetcher";
 import type { Product } from "@/type";
 
 /**
@@ -186,6 +189,33 @@ function CompareModal({ open, onClose }: CompareModalProps) {
   const compare = useCompare();
   const [pickerOpen, setPickerOpen] = useState(false);
 
+  /**
+   * Input: compare ids
+   * Process: fetch compare products via mock API
+   * Output: products rendered in compare table
+   */
+  const { data: fetched, loading } = useCompareProducts(compare.ids);
+
+  /**
+   * Input: none (trigger on open)
+   * Process: load all products to build candidate list
+   * Output: `all` list filtered against current compare ids
+   */
+  const [all, setAll] = useState<Product[]>([]);
+  useEffect(() => {
+    if (!pickerOpen) return;
+    let alive = true;
+    (async () => {
+      try {
+        const list = await getProducts();
+        if (alive) setAll(list);
+      } catch (e) {
+        console.error('[Search CompareModal] load candidates failed:', e);
+      }
+    })();
+    return () => { alive = false; };
+  }, [pickerOpen]);
+
   if (!open) return null;
 
   return (
@@ -246,9 +276,7 @@ function CompareModal({ open, onClose }: CompareModalProps) {
         <div className="max-h-[70vh] overflow-auto">
           {pickerOpen &&
             (() => {
-              const candidates: Product[] = SOURCE.filter(
-                (pd) => !compare.ids.includes(pd.id)
-              ) as Product[];
+              const candidates: Product[] = all.filter(pd => !compare.ids.includes(pd.id));
               return (
                 <div className="sticky top-0 z-10 border-b bg-white p-3">
                   <div className="mb-2 text-sm font-medium text-gray-700">
@@ -285,9 +313,13 @@ function CompareModal({ open, onClose }: CompareModalProps) {
             })()}
 
           {(() => {
-            const items: Product[] = compare.ids
-              .map((id) => SOURCE.find((p) => p.id === id))
-              .filter(Boolean) as Product[];
+            const items: Product[] = (fetched ?? []) as Product[];
+
+            if (loading) {
+              return (
+                <div className="p-10 text-center text-gray-600">Loading compare…</div>
+              );
+            }
 
             if (items.length === 0) {
               return (
@@ -442,9 +474,20 @@ function CompareButton({
 export default function SearchPage() {
   const [params] = useSearchParams();
   const q = params.get("q") ?? "";
-  const { data, loading } = useSearchProducts(q);
+  // Fetch all products once; filter client-side by keyword
+  const { data: all, loading } = useProducts({ mode: 'all' });
+  // Keyword filter (case-insensitive) on name/brand/slug
+  const base = all ?? [];
+  const needle = q.trim().toLowerCase();
+  const byQuery = needle
+    ? base.filter(p =>
+        p.name.toLowerCase().includes(needle) ||
+        p.brand.toLowerCase().includes(needle) ||
+        p.slug.toLowerCase().includes(needle)
+      )
+    : base;
   const sort = params.get("sort") ?? "relevance";
-  const sorted = applySort(data, sort);
+  const sorted = applySort(byQuery, sort);
   const wish = useWishlist();
 
   /**

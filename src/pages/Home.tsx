@@ -2,7 +2,7 @@ import Container from '@/components/layout/Container';
 import { Link } from 'react-router-dom';
 import { formatCurrency } from '@/lib/format';
 import type { Product } from '@/type';
-import { useFeaturedProducts } from '@/hooks'; // nếu không có barrel, dùng: '@/hooks/useProducts'
+import { useFeaturedProducts } from '@/hooks/useProducts';
 
 /**
  * Home page showing a featured products grid (light mode).
@@ -25,7 +25,7 @@ export default function Home() {
   if (error) {
     return (
       <Container>
-        <div className="py-10 text-red-600">{error}</div>
+        <div className="py-10 text-red-600">{String(error)}</div>
       </Container>
     );
   }

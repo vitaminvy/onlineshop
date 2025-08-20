@@ -2,13 +2,14 @@ import { useParams, Link } from "react-router-dom";
 import Container from "@/components/layout/Container";
 import { formatCurrency } from "@/lib/format";
 import { useCart } from "@/store/cart";
-import useProduct from "@/hooks/useProduct";
 import { toast } from "sonner";
 import { useWishlist } from "@/store/wishlist";
-import { products as SOURCE } from '@/data/products';
 import { useCompare } from '@/store/compare';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { Product } from '@/type';
+import { useProductBySlug } from '@/hooks/useProductBySlug';
+import { useCompareProducts } from '@/hooks/useCompareProducts';
+import { getProducts } from '@/lib/fetcher';
 
 
 type CompareModalProps = { open: boolean; onClose: () => void };
@@ -22,6 +23,33 @@ type CompareModalProps = { open: boolean; onClose: () => void };
 function CompareModal({ open, onClose }: CompareModalProps) {
   const compare = useCompare();
   const [pickerOpen, setPickerOpen] = useState(false);
+
+  /**
+   * Input: compare ids
+   * Process: fetch compare products via mock API
+   * Output: items for the compare table
+   */
+  const { data: fetched, loading } = useCompareProducts(compare.ids);
+
+  /**
+   * Input: none (trigger when picker is opened)
+   * Process: load all products from mock API to build candidate list
+   * Output: local `all` list filtered against current compare ids
+   */
+  const [all, setAll] = useState<Product[]>([]);
+  useEffect(() => {
+    if (!pickerOpen) return;
+    let alive = true;
+    (async () => {
+      try {
+        const list = await getProducts();
+        if (alive) setAll(list);
+      } catch (e) {
+        console.error('[ProductDetail CompareModal] load candidates failed:', e);
+      }
+    })();
+    return () => { alive = false; };
+  }, [pickerOpen]);
 
   if (!open) return null;
 
@@ -66,7 +94,7 @@ function CompareModal({ open, onClose }: CompareModalProps) {
         {/* Body */}
         <div className="max-h-[70vh] overflow-auto">
           {pickerOpen && (() => {
-            const candidates: Product[] = SOURCE.filter(pd => !compare.ids.includes(pd.id)) as Product[];
+            const candidates: Product[] = all.filter(pd => !compare.ids.includes(pd.id));
             return (
               <div className="sticky top-0 z-10 border-b bg-white p-3">
                 <div className="mb-2 text-sm font-medium text-gray-700">Add product to compare</div>
@@ -92,16 +120,14 @@ function CompareModal({ open, onClose }: CompareModalProps) {
           })()}
 
           {(() => {
-            const items: Product[] = compare.ids
-              .map(id => SOURCE.find(p => p.id === id))
-              .filter(Boolean) as Product[];
-
+            const items: Product[] = (fetched ?? []) as Product[];
+            if (loading) {
+              return <div className="p-10 text-center text-gray-600">Loading compare…</div>;
+            }
             if (items.length === 0) {
               return <div className="p-10 text-center text-gray-600">No products to compare.</div>;
             }
-
             const specKeys = Array.from(new Set(items.flatMap(p => Object.keys(p.specs ?? {}))));
-
             return (
               <div className="w-full overflow-auto">
                 <table className="w-full min-w-[720px] table-fixed text-sm">
@@ -111,9 +137,9 @@ function CompareModal({ open, onClose }: CompareModalProps) {
                       {items.map(p => (
                         <th key={p.id} className="w-56 p-3 align-top">
                           <div className="flex items-start justify-between gap-2">
-                            <a href={`/product/${p.slug}`} className="font-medium text-gray-900 hover:underline" onClick={onClose}>
+                            <Link to={`/product/${p.slug}`} className="font-medium text-gray-900 hover:underline" onClick={onClose}>
                               {p.name}
-                            </a>
+                            </Link>
                             <button
                               onClick={() => compare.remove(p.id)}
                               className="rounded-md border border-blue-500 bg-white px-2 py-1 text-xs text-blue-600 hover:bg-blue-50 active:opacity-60"
@@ -175,7 +201,7 @@ function CompareModal({ open, onClose }: CompareModalProps) {
  */
 export default function ProductDetail() {
   const { slug = "" } = useParams();
-  const { data: p, loading, error } = useProduct(slug);
+  const { data: p, loading, error } = useProductBySlug(slug);
   /**
  * Input: user toggles compare in detail page
  * Process: manage modal open/close and compare store access
@@ -197,7 +223,7 @@ const compare = useCompare();
   if (error || !p) {
     return (
       <Container>
-        <div className="py-10">{error ?? "Product not found."}</div>
+        <div className="py-10">{error ? String(error) : "Product not found."}</div>
       </Container>
     );
   }
