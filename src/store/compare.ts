@@ -2,7 +2,10 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
+
 /**
+ * const [loading, setLoading] = useState<boolean>(false);
+
  * Small compare store using product IDs.
  * Keeps a small set of selected product IDs for comparing.
  */
