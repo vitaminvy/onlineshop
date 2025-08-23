@@ -4,8 +4,7 @@ import { useCompare } from "@/store/compare";
 import type { Product } from "@/type";
 import { products as SOURCE } from "@/data/products";
 // Add: mock fetcher for compare
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import fetcher, { getCompare } from "@/lib/fetcher";
+import { getCompare } from "@/lib/fetcher";
 import React from "react";
 import { motion } from "framer-motion";
 console.log("MODAL RENDERED");
