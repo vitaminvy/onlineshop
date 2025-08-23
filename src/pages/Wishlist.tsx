@@ -256,13 +256,6 @@ export default function Wishlist() {
           <div className="flex items-center gap-4">
             <PriceFilter />
             <SortSelect />
-            <button
-              type="button"
-              onClick={() => setCompareOpen(true)}
-              className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-white shadow-lg hover:opacity-90"
-            >
-              Compare
-            </button>
           </div>
         </div>
         <div className="rounded-lg border bg-white p-10 text-center">
@@ -326,13 +319,6 @@ export default function Wishlist() {
         <div className="flex items-center gap-4">
           <PriceFilter />
           <SortSelect />
-          <button
-            type="button"
-            onClick={() => setCompareOpen(true)}
-            className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-white shadow-lg hover:opacity-90"
-          >
-            Compare
-          </button>
         </div>
       </div>
 

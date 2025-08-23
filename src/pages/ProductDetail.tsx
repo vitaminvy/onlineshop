@@ -4,11 +4,9 @@ import { formatCurrency } from "@/lib/format";
 import { useCart } from "@/store/cart";
 import { toast } from "sonner";
 import { useWishlist } from "@/store/wishlist";
-import { useCompare } from '@/store/compare';
-import { useState } from 'react';
-import { useProductBySlug } from '@/hooks/useProductBySlug';
+import { useState } from "react";
+import { useProductBySlug } from "@/hooks/useProductBySlug";
 import CompareModal from "@/components/compare/CompareModal";
-
 
 /**
  * Product detail view with sticky gallery and buy box.
@@ -17,12 +15,11 @@ export default function ProductDetail() {
   const { slug = "" } = useParams();
   const { data: p, loading, error } = useProductBySlug(slug);
   /**
- * Input: user toggles compare in detail page
- * Process: manage modal open/close and compare store access
- * Output: local UI state and compare actions
- */
-const [compareOpen, setCompareOpen] = useState(false);
-const compare = useCompare();
+   * Input: user toggles compare in detail page
+   * Process: manage modal open/close and compare store access
+   * Output: local UI state and compare actions
+   */
+  const [compareOpen, setCompareOpen] = useState(false);
   const add = useCart((s) => s.addToCart);
   const wishlist = useWishlist();
 
@@ -37,7 +34,9 @@ const compare = useCompare();
   if (error || !p) {
     return (
       <Container>
-        <div className="py-10">{error ? String(error) : "Product not found."}</div>
+        <div className="py-10">
+          {error ? String(error) : "Product not found."}
+        </div>
       </Container>
     );
   }
@@ -90,8 +89,8 @@ const compare = useCompare();
               <button
                 type="button"
                 aria-pressed={fav}
-                aria-label={fav ? 'Remove from wishlist' : 'Add to wishlist'}
-                title={fav ? 'Remove from wishlist' : 'Add to wishlist'}
+                aria-label={fav ? "Remove from wishlist" : "Add to wishlist"}
+                title={fav ? "Remove from wishlist" : "Add to wishlist"}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => {
                   if (!p) return;
@@ -101,10 +100,12 @@ const compare = useCompare();
                 className="ml-3 inline-flex items-center justify-center p-1 bg-transparent hover:bg-transparent focus:bg-transparent active:bg-transparent border-0 outline-none ring-0 appearance-none"
               >
                 <svg
-                  className={`h-6 w-6 transition-colors ${fav ? 'text-red-500' : 'text-gray-400'}`}
+                  className={`h-6 w-6 transition-colors ${
+                    fav ? "text-red-500" : "text-gray-400"
+                  }`}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  fill={fav ? 'currentColor' : 'none'}
+                  fill={fav ? "currentColor" : "none"}
                   stroke="currentColor"
                   strokeWidth="2"
                 >
@@ -115,23 +116,6 @@ const compare = useCompare();
                     strokeLinejoin="round"
                   />
                 </svg>
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  if (!p) return;
-                  const wasCompared = compare.has(p.id);
-                  compare.toggle(p.id);
-                  setCompareOpen(true);
-                  toast.success(wasCompared ? 'Removed from compare' : 'Added to compare');
-                }}
-                className={`rounded-md border px-4 py-2 text-sm ${
-                  compare.has(p?.id ?? '')
-                    ? 'border-blue-600 bg-blue-50 text-blue-700'
-                    : 'border-blue-500 bg-white text-blue-600 hover:bg-blue-50 active:opacity-60'
-                }`}
-              >
-                {compare.has(p?.id ?? '') ? 'Compared' : 'Compare'}
               </button>
             </div>
           </div>

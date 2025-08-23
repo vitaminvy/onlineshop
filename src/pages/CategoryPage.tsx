@@ -424,13 +424,7 @@ export default function CategoryPage() {
             {/* Floating Compare button (only when having selections) */}
             {compare.ids.length > 0 && (
               <div className="fixed bottom-5 right-5 z-40">
-                <button
-                  type="button"
-                  onClick={() => setCompareOpen(true)}
-                  className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-white shadow-lg hover:opacity-90"
-                >
-                  Compare ({compare.ids.length})
-                </button>
+                
               </div>
             )}
 
