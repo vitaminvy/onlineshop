@@ -12,8 +12,7 @@ import OrderSuccess from '@/pages/OrderSuccess';
 import Orders from '@/pages/Orders';
 import OrderDetail from '@/pages/OrderDetail';
 import Wishlist from '@/pages/Wishlist';
-
-
+import FloatingCartButton from "@/components/cart/FloatingCartButton";
 
 
 /**
@@ -41,8 +40,11 @@ export default function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/orders/:id" element={<OrderDetail />} />  
           <Route path="/wishlist" element={<Wishlist />} />
-
         </Routes>
+        
+        <FloatingCartButton />
+
+        
       </div>
     </BrowserRouter>
   );
