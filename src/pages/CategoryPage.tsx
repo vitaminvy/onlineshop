@@ -2,12 +2,10 @@ import { useState } from "react";
 import { useParams, Link, useSearchParams } from "react-router-dom";
 import Container from "@/components/layout/Container";
 import useProductsByCategorySlug from "@/hooks/useProductsByCategory";
-import { formatCurrency } from "@/lib/format";
-import { useWishlist } from "@/store/wishlist";
-import { toast } from "sonner";
 import { useCompare } from "@/store/compare";
 
 import CompareModal from '@/components/compare/CompareModal';
+import ProductCard from '@/components/product/ProductCard';
 
 /**
  * Input: sorted list and optional min/max (string from query)
@@ -180,7 +178,6 @@ export default function CategoryPage() {
   const [params] = useSearchParams();
   const sort = params.get("sort") ?? "relevance";
   const sorted = applySort(data, sort);
-  const wish = useWishlist();
   const compare = useCompare();
 
   // Local UI state: open/close compare modal
@@ -301,122 +298,7 @@ export default function CategoryPage() {
           <>
             <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
               {paged.map((p) => (
-                <Link
-                  key={p.id}
-                  to={`/product/${p.slug}`}
-                  className="group block overflow-hidden rounded-lg border bg-white transition hover:shadow"
-                >
-                  <div className="aspect-[4/3] w-full overflow-hidden bg-gray-50">
-                    <img
-                      src={p.thumbnail}
-                      alt={p.name}
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="p-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="line-clamp-1 text-sm font-medium text-gray-900">
-                        {p.name}
-                      </h3>
-                      <button
-                        type="button"
-                        aria-label={
-                          wish.has(p.id)
-                            ? "Remove from wishlist"
-                            : "Add to wishlist"
-                        }
-                        aria-pressed={wish.has(p.id)}
-                        title={
-                          wish.has(p.id)
-                            ? "Remove from wishlist"
-                            : "Add to wishlist"
-                        }
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          const wasLiked = wish.has(p.id);
-                          wish.toggle(p.id);
-                          toast.success(
-                            wasLiked
-                              ? "Removed from wishlist"
-                              : "Added to wishlist"
-                          );
-                        }}
-                        className={`
-    ml-2 inline-flex items-center justify-center p-1
-    bg-transparent hover:bg-transparent focus:bg-transparent active:bg-transparent
-    border-0 outline-none ring-0 appearance-none
-    ${wish.has(p.id) ? "text-red-500" : "text-gray-400 hover:text-gray-600"}
-  `}
-                      >
-                        <svg
-                          width="18"
-                          height="18"
-                          viewBox="0 0 24 24"
-                          className="transition-colors"
-                          fill={wish.has(p.id) ? "currentColor" : "none"}
-                          stroke={
-                            wish.has(p.id) ? "currentColor" : "currentColor"
-                          }
-                          strokeWidth="2"
-                          xmlns="http://www.w3.org/2000/svg"
-                          aria-hidden="true"
-                        >
-                          <path
-                            d="M12 21s-1.45-1.3-3.1-2.82C6.3 16.84 4 14.78 4 12.2 4 10.02 5.8 8.2 8 8.2c1.3 0 2.6.64 3.4 1.66.8-1.02 2.1-1.66 3.4-1.66 2.2 0 4 1.82 4 4 0 2.58-2.3 4.64-4.9 6-1.65 1.52-3.1 2.8-3.1 2.8z"
-                            fillRule="evenodd"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          const wasCompared = compare.has(p.id);
-                          compare.toggle(p.id);
-                          setCompareOpen(true);
-                          toast.success(
-                            wasCompared
-                              ? "Removed from compare"
-                              : "Added to compare"
-                          );
-                        }}
-                        className={`ml-2 shrink-0 rounded-md border px-2 py-1 text-xs ${
-                          compare.has(p.id)
-                            ? "border-blue-600 bg-blue-50 text-blue-700"
-                            : "border-blue-500 bg-white text-blue-600 hover:bg-blue-50 active:opacity-60"
-                        }`}
-                      >
-                        {compare.has(p.id) ? "Compared" : "Compare"}
-                      </button>
-                    </div>
-                    <p className="text-xs text-gray-500">{p.brand}</p>
-                    {/* Stock line */}
-
-                    {typeof p.stock === "number" &&
-                      (p.stock === 0 ? (
-                        <span className="mt-1 inline-block rounded bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-600">
-                          Out of stock
-                        </span>
-                      ) : p.stock <= 5 && p.stock !== 0 ? (
-                        <span className="mt-1 inline-block rounded bg-amber-50 px-2 py-0.5 text-[11px] font-medium text-amber-700">
-                          Only {p.stock} left
-                        </span>
-                      ) : (
-                        <span className="mt-1 inline-block rounded bg-gray-100 px-2 py-0.5 text-[11px] text-gray-700">
-                          Stock: {p.stock}
-                        </span>
-                      ))}
-
-                    <p className="text-base font-semibold text-emerald-600">
-                      {formatCurrency(p.price)}
-                    </p>
-                  </div>
-                </Link>
+                <ProductCard key={p.id} p={p} />
               ))}
             </div>
             <Pager page={page} totalPages={totalPages} />

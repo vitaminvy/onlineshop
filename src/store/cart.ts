@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 import type { CartItem, ID, Product } from '@/type';
+import { useProducts } from "./product";
+
 
 type CartState = {
   items: CartItem[];
@@ -61,6 +63,8 @@ export const useCart = create<CartState>((set, get) => ({
     if (idx >= 0) next[idx] = { ...next[idx], quantity: next[idx].quantity + qty };
     else next.push({ productId: product.id, quantity: qty });
     set(persistCart(next)); 
+    useProducts.getState().reduceStock(product.id, qty);
+
     
   },
 
