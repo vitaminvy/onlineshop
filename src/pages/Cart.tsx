@@ -7,6 +7,8 @@ import { products as SOURCE } from "@/data/products";
 import type { CartItem } from "@/type";
 import { toast } from "sonner";
 import { useState } from "react";
+import { estimateShipping } from "@/lib/shipping";
+
 
 /**
  * Input: cart store
@@ -62,7 +64,7 @@ export default function Cart() {
     (acc: number, l: CartLine) => acc + (l.product?.price ?? 0) * l.qty,
     0
   );
-
+  const shippingFee = estimateShipping(subtotal, totalItems);
   // Empty state
   if (lines.length === 0) {
     return (
@@ -316,11 +318,20 @@ export default function Cart() {
                 <span>Items</span>
                 <span className="font-medium">{totalItems}</span>
               </div>
+              
               <div className="mt-2 flex justify-between text-sm">
                 <span>Subtotal</span>
                 <span className="font-semibold">
                   {formatCurrency(subtotal)}
                 </span>
+              </div>
+              <div className="mt-2 flex justify-between text-sm">
+                <span>Estimated Shipping</span>
+                <span className="font-semibold">{formatCurrency(shippingFee)}</span>
+              </div>
+              <div className="mt-2 flex justify-between text-sm">
+                <span>Total</span>
+                <span className="font-bold">{formatCurrency(subtotal + shippingFee)}</span>
               </div>
               <button
                 onClick={() => navigate("/checkout")}

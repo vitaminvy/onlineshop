@@ -49,6 +49,10 @@ export default function Checkout() {
     [lines]
   );
 
+  const totalItems = lines.reduce((a, l) => a + l.qty, 0);
+  const shippingFee = subtotal > 0 ? 20000 + totalItems * 2000 : 0;
+  const tax = subtotal * 0.08;
+  const total = shippingFee + subtotal;
   // Form
   type FormData = {
     fullName: string;
@@ -108,6 +112,9 @@ export default function Checkout() {
       id: `ORD-${Date.now()}`,
       createdAt: new Date().toISOString(),
       subtotal,
+      tax,
+      shippingFee,
+      total,
       items: lines.map(l => ({
         id: l.productId,
         name: l.product?.name ?? l.productId,
@@ -130,6 +137,9 @@ export default function Checkout() {
     id: string;
     createdAt: string;
     subtotal: number;
+    shippingFee?: number;
+    tax:number;
+    total?: number;
     items: Array<{ id: string; name: string; qty: number; price: number }>;
     customer?: { fullName: string; email: string; phone: string; address: string };
   };
@@ -145,7 +155,7 @@ export default function Checkout() {
   }
     
 
-    toast.success(`Order placed! Total: ${formatCurrency(subtotal)}`);
+    toast.success(`Order placed! Total: ${formatCurrency(total)}`);
     localStorage.removeItem('checkoutForm');
      
     clearCart?.();
@@ -289,16 +299,16 @@ export default function Checkout() {
                 </div>
                 {/* Shipping/Tax placeholders */}
                 <div className="mt-1 flex justify-between text-gray-600">
-                  <span>Shipping</span>
-                  <span>Free</span>
+                  <span>Estimated Shipping</span>
+                  <span>{formatCurrency(shippingFee)}</span>
                 </div>
                 <div className="mt-1 flex justify-between text-gray-600">
                   <span>Tax</span>
-                  <span>—</span>
+                  <span>{formatCurrency(tax)}</span>
                 </div>
                 <div className="mt-3 flex justify-between text-base">
                   <span className="font-semibold">Total</span>
-                  <span className="font-bold text-primary">{formatCurrency(subtotal)}</span>
+                  <span className="font-bold text-primary">{formatCurrency(subtotal + shippingFee)}</span>
                 </div>
 
                     <button onClick={() => navigate('/cart')}
