@@ -85,7 +85,37 @@ export default function ProductDetail() {
         <div className="lg:col-span-6">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-semibold text-ink">{p.name}</h1>
-            <div className="flex items-center gap-2">
+          </div>
+          {p.shortDesc && <p className="mt-2 text-gray-600">{p.shortDesc}</p>}
+
+          {/* Buy box */}
+          <div className="mt-4 rounded-lg border bg-white p-4">
+            <div className="text-sm text-gray-500">From</div>
+            <div className="text-2xl font-bold text-primary">
+              {formatCurrency(p.price)}
+            </div>
+            <div className="mt-1 text-sm text-gray-600">
+              Brand: <span className="font-medium text-ink">{p.brand}</span>
+            </div>
+            <div className="mt-1 text-sm">
+              {p.stock > 0 ? (
+                p.stock <= 5 ? (
+                  <span className="rounded bg-amber-50 px-2 py-0.5 text-amber-700">
+                    Only {p.stock} left
+                  </span>
+                ) : (
+                  <span className="rounded bg-green-50 px-2 py-0.5 text-green-700">
+                    In stock • {p.stock} pcs
+                  </span>
+                )
+              ) : (
+                <span className="rounded bg-gray-100 px-2 py-0.5 text-gray-600">
+                  Out of stock
+                </span>
+              )}
+            </div>
+
+            <div className="flex gap-2 mt-3">
               <button
                 type="button"
                 aria-pressed={fav}
@@ -117,38 +147,6 @@ export default function ProductDetail() {
                   />
                 </svg>
               </button>
-            </div>
-          </div>
-          {p.shortDesc && <p className="mt-2 text-gray-600">{p.shortDesc}</p>}
-
-          {/* Buy box */}
-          <div className="mt-4 rounded-lg border bg-white p-4">
-            <div className="text-sm text-gray-500">From</div>
-            <div className="text-2xl font-bold text-primary">
-              {formatCurrency(p.price)}
-            </div>
-            <div className="mt-1 text-sm text-gray-600">
-              Brand: <span className="font-medium text-ink">{p.brand}</span>
-            </div>
-            <div className="mt-1 text-sm">
-              {p.stock > 0 ? (
-                p.stock <= 5 ? (
-                  <span className="rounded bg-amber-50 px-2 py-0.5 text-amber-700">
-                    Only {p.stock} left
-                  </span>
-                ) : (
-                  <span className="rounded bg-green-50 px-2 py-0.5 text-green-700">
-                    In stock • {p.stock} pcs
-                  </span>
-                )
-              ) : (
-                <span className="rounded bg-gray-100 px-2 py-0.5 text-gray-600">
-                  Out of stock
-                </span>
-              )}
-            </div>
-
-            <div className="mt-4 flex gap-2">
               <button
                 onClick={() => {
                   add(p, 1);

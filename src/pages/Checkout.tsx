@@ -1,12 +1,14 @@
 // src/pages/Checkout.tsx
-import { useEffect, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Container from '@/components/layout/Container';
-import { useCart } from '@/store/cart';
-import { products as SOURCE } from '@/data/products';
-import { formatCurrency } from '@/lib/format';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
+import { useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import Container from "@/components/layout/Container";
+import { useCart } from "@/store/cart";
+import { products as SOURCE } from "@/data/products";
+import { formatCurrency } from "@/lib/format";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { calculateShippingFee } from "@/lib/shipping";
+
 /**
  * Checkout page: shipping form + order summary
  *
@@ -15,12 +17,12 @@ import { toast } from 'sonner';
  * Output: confirmation redirect (mock) and emptied cart
  */
 export default function Checkout() {
-  type ProductMeta = typeof SOURCE[number];
+  type ProductMeta = (typeof SOURCE)[number];
   type CartLine = { productId: string; qty: number; product?: ProductMeta };
 
   const navigate = useNavigate();
-  const items = useCart(s => s.items ?? []);
-  const clearCart = useCart(s => s.clearCart);
+  const items = useCart((s) => s.items ?? []);
+  const clearCart = useCart((s) => s.clearCart);
 
   // Build lookup map for product meta
   const productMap = useMemo(() => {
@@ -31,28 +33,25 @@ export default function Checkout() {
   }, []);
 
   // Convert store items → UI lines
-  const readQty = (it: { quantity?: number; qty?: number } | undefined): number =>
-    typeof it?.quantity === 'number' ? it.quantity! :
-    typeof it?.qty === 'number' ? Number(it.qty) : 0;
+  const readQty = (
+    it: { quantity?: number; qty?: number } | undefined
+  ): number =>
+    typeof it?.quantity === "number"
+      ? it.quantity!
+      : typeof it?.qty === "number"
+      ? Number(it.qty)
+      : 0;
 
   const lines: CartLine[] = useMemo(
-    () => items.map((it) => ({
-      ...it,
-      qty: readQty(it),
-      product: productMap[it.productId],
-    })),
+    () =>
+      items.map((it) => ({
+        ...it,
+        qty: readQty(it),
+        product: productMap[it.productId],
+      })),
     [items, productMap]
   );
 
-  const subtotal = useMemo(
-    () => lines.reduce((acc, l) => acc + (l.product?.price ?? 0) * l.qty, 0),
-    [lines]
-  );
-
-  const totalItems = lines.reduce((a, l) => a + l.qty, 0);
-  const shippingFee = subtotal > 0 ? 20000 + totalItems * 2000 : 0;
-  const tax = subtotal * 0.08;
-  const total = shippingFee + subtotal;
   // Form
   type FormData = {
     fullName: string;
@@ -60,19 +59,50 @@ export default function Checkout() {
     phone: string;
     address: string;
     note?: string;
+    shippingMethod: "standard" | "express";
+    paymentMethod: "cod" | "card" | "wallet";
   };
 
-  const { register, handleSubmit, formState: { errors, isSubmitting }, reset, watch } = useForm<FormData>({
-  defaultValues: { fullName: '', email: '', phone: '', address: '', note: '' }
-});
-/**
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+    watch,
+  } = useForm<FormData>({
+    defaultValues: {
+      fullName: "",
+      email: "",
+      phone: "",
+      address: "",
+      note: "",
+    },
+  });
+
+  const subtotal = useMemo(
+    () => lines.reduce((acc, l) => acc + (l.product?.price ?? 0) * l.qty, 0),
+    [lines]
+  );
+
+  const totalItems = lines.reduce((a, l) => a + l.qty, 0);
+  // Move watch("shippingMethod") above where calculateShippingFee is called
+  const shippingMethod = watch("shippingMethod");
+  const shippingFee = calculateShippingFee(
+    shippingMethod,
+    subtotal,
+    totalItems
+  );
+  const tax = subtotal * 0.08;
+  const total = shippingFee + subtotal;
+
+  /**
    * Input: none
    * Process: entering Checkout starts a new order; remove previous snapshot
    * Output: clean 'lastOrder' in localStorage
    */
   useEffect(() => {
     try {
-      localStorage.removeItem('lastOrder');
+      localStorage.removeItem("lastOrder");
     } catch (e) {
       void e; // ignore error
     }
@@ -80,17 +110,21 @@ export default function Checkout() {
   // Load draft from localStorage on mount
   useEffect(() => {
     try {
-      const raw = localStorage.getItem('checkoutForm');
+      const raw = localStorage.getItem("checkoutForm");
       if (raw) reset(JSON.parse(raw));
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
   }, [reset]);
 
   // Auto-save form changes to localStorage
   useEffect(() => {
     const sub = watch((values) => {
       try {
-        localStorage.setItem('checkoutForm', JSON.stringify(values));
-      } catch { /* ignore */ }
+        localStorage.setItem("checkoutForm", JSON.stringify(values));
+      } catch {
+        /* ignore */
+      }
     });
     return () => sub.unsubscribe();
   }, [watch]);
@@ -99,15 +133,21 @@ export default function Checkout() {
    * Process: (mock) send order, clear cart, navigate to home
    * Output: redirect to home with simple alert
    */
-  const onSubmit = async (data: FormData) => {    // Validate stock before placing order
-    const over = lines.filter(l => typeof l.product?.stock === 'number' && l.qty > (l.product?.stock ?? 0));
+  const onSubmit = async (data: FormData) => {
+    // Validate stock before placing order
+    const over = lines.filter(
+      (l) =>
+        typeof l.product?.stock === "number" && l.qty > (l.product?.stock ?? 0)
+    );
     if (over.length) {
-        toast.error('Some items exceed available stock. Please adjust quantities in your cart.');
-        return;
+      toast.error(
+        "Some items exceed available stock. Please adjust quantities in your cart."
+      );
+      return;
     }
     // mock submit
-    await new Promise(r => setTimeout(r, 400));
-      // Build order snapshot and persist
+    await new Promise((r) => setTimeout(r, 400));
+    // Build order snapshot and persist
     const order = {
       id: `ORD-${Date.now()}`,
       createdAt: new Date().toISOString(),
@@ -115,7 +155,7 @@ export default function Checkout() {
       tax,
       shippingFee,
       total,
-      items: lines.map(l => ({
+      items: lines.map((l) => ({
         id: l.productId,
         name: l.product?.name ?? l.productId,
         qty: l.qty,
@@ -128,51 +168,59 @@ export default function Checkout() {
         address: data.address,
       },
     };
-              /**
-   * Input: current order object
-   * Process: append to 'orders' list in localStorage (history)
-   * Output: persisted order history
-   */
-  type OrderSnapshot = {
-    id: string;
-    createdAt: string;
-    subtotal: number;
-    shippingFee?: number;
-    tax:number;
-    total?: number;
-    items: Array<{ id: string; name: string; qty: number; price: number }>;
-    customer?: { fullName: string; email: string; phone: string; address: string };
-  };
-  try {
-    const rawList = localStorage.getItem('orders');
-    const list: OrderSnapshot[] = rawList ? (JSON.parse(rawList) as OrderSnapshot[]) : [];
-    // Prevent duplicate by id (re-submit)
-    if (!list.some(o => o.id === order.id)) list.unshift(order);
-    localStorage.setItem('orders', JSON.stringify(list));
-  } catch (e) {
-    // ignore persist errors (e.g., storage quota or private mode)
-    void e;
-  }
-    
+    /**
+     * Input: current order object
+     * Process: append to 'orders' list in localStorage (history)
+     * Output: persisted order history
+     */
+    type OrderSnapshot = {
+      id: string;
+      createdAt: string;
+      subtotal: number;
+      shippingFee?: number;
+      tax: number;
+      total?: number;
+      items: Array<{ id: string; name: string; qty: number; price: number }>;
+      customer?: {
+        fullName: string;
+        email: string;
+        phone: string;
+        address: string;
+      };
+    };
+    try {
+      const rawList = localStorage.getItem("orders");
+      const list: OrderSnapshot[] = rawList
+        ? (JSON.parse(rawList) as OrderSnapshot[])
+        : [];
+      // Prevent duplicate by id (re-submit)
+      if (!list.some((o) => o.id === order.id)) list.unshift(order);
+      localStorage.setItem("orders", JSON.stringify(list));
+    } catch (e) {
+      // ignore persist errors (e.g., storage quota or private mode)
+      void e;
+    }
 
     toast.success(`Order placed! Total: ${formatCurrency(total)}`);
-    localStorage.removeItem('checkoutForm');
-     
+    localStorage.removeItem("checkoutForm");
+
     clearCart?.();
-    navigate('/order-success');
+    navigate("/order-success");
   };
 
   if (!lines.length) {
     return (
       <Container>
         <div className="py-10">
-          <h1 className="text-xl font-semibold">Checkout</h1>
+          <h1 className="text-xl text-blue-900 font-semibold">Checkout</h1>
           <p className="text-gray-600">Your cart is empty.</p>
           <div className="mt-4">
             <button
-              onClick={() => navigate('/')}
+              onClick={() => navigate("/")}
               className="inline-block rounded-md bg-primary px-4 py-2 text-white hover:opacity-90"
-            >Continue Shopping</button>
+            >
+              Continue Shopping
+            </button>
           </div>
         </div>
       </Container>
@@ -182,21 +230,28 @@ export default function Checkout() {
   return (
     <Container>
       <div className="py-8">
-        <h1 className="text-xl font-semibold">Checkout</h1>
+        <h1 className="text-xl text-blue-900 font-semibold">Checkout</h1>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-12">
           {/* Left: shipping form */}
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 rounded-lg border bg-white p-4 lg:col-span-7">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-4 rounded-lg border bg-white p-4 lg:col-span-7"
+          >
             <h2 className="text-lg font-semibold">Shipping Information</h2>
 
             <div>
               <label className="block text-sm font-medium">Full name</label>
               <input
-                {...register('fullName', { required: 'Full name is required' })}
+                {...register("fullName", { required: "Full name is required" })}
                 className="mt-1 w-full rounded-md border px-3 py-2 outline-none focus:border-primary"
                 placeholder="Nguyen Van A"
               />
-              {errors.fullName && <p className="mt-1 text-sm text-red-600">{errors.fullName.message}</p>}
+              {errors.fullName && (
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.fullName.message}
+                </p>
+              )}
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
@@ -204,62 +259,136 @@ export default function Checkout() {
                 <label className="block text-sm font-medium">Email</label>
                 <input
                   type="email"
-                     {...register('email', {
-                    required: 'Email is required',
+                  {...register("email", {
+                    required: "Email is required",
                     pattern: {
                       value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: 'Invalid email',
+                      message: "Invalid email",
                     },
                   })}
                   className="mt-1 w-full rounded-md border px-3 py-2 outline-none focus:border-primary"
                   placeholder="you@example.com"
                 />
-                {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
+                {errors.email && (
+                  <p className="mt-1 text-sm text-red-600">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium">Phone</label>
                 <input
-                    {...register('phone', {
-                    required: 'Phone is required',
+                  {...register("phone", {
+                    required: "Phone is required",
                     pattern: {
                       value: /^[0-9+\-\s]{8,}$/,
-                      message: 'Invalid phone',
+                      message: "Invalid phone",
                     },
-                    })}
-                    className="mt-1 w-full rounded-md border px-3 py-2 outline-none focus:border-primary"
-                    placeholder="0901234567"
+                  })}
+                  className="mt-1 w-full rounded-md border px-3 py-2 outline-none focus:border-primary"
+                  placeholder="0901234567"
                 />
-                {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>}
+                {errors.phone && (
+                  <p className="mt-1 text-sm text-red-600">
+                    {errors.phone.message}
+                  </p>
+                )}
               </div>
             </div>
 
             <div>
               <label className="block text-sm font-medium">Address</label>
               <textarea
-                {...register('address', { required: 'Address is required' })}
+                {...register("address", { required: "Address is required" })}
                 className="mt-1 w-full rounded-md border px-3 py-2 outline-none focus:border-primary"
                 placeholder="123 Le Loi, Quan 1, TP.HCM"
                 rows={3}
               />
-              {errors.address && <p className="mt-1 text-sm text-red-600">{errors.address.message}</p>}
+              {errors.address && (
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.address.message}
+                </p>
+              )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium">Note (optional)</label>
+              <label className="block text-sm font-medium">
+                Note (optional)
+              </label>
               <textarea
-                {...register('note')}
+                {...register("note")}
                 className="mt-1 w-full rounded-md border px-3 py-2 outline-none focus:border-primary"
                 placeholder="Leave at the door…"
                 rows={2}
               />
             </div>
+            <h2 className="text-lg font-semibold mt-4">Shipping Method</h2>
+            <div>
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  value="standard"
+                  {...register("shippingMethod", {
+                    required: "Please select a shipping method",
+                  })}
+                />
+                Standard (20,000₫ + 2,000₫ per item)
+              </label>
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  value="express"
+                  {...register("shippingMethod", {
+                    required: "Please select a shipping method",
+                  })}
+                />
+                Express (50,000₫ flat rate)
+              </label>
+            </div>
+            {errors.shippingMethod && (
+              <p className="text-sm text-red-600">
+                {errors.shippingMethod.message}
+              </p>
+            )}
+            <h2 className="text-lg font-semibold">Payment Method</h2>
+            <div className="space-y-2">
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  value="cod"
+                  {...register("paymentMethod", { required: true })}
+                />
+                Thanh toán khi nhận hàng (COD)
+              </label>
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  value="card"
+                  {...register("paymentMethod", { required: true })}
+                />
+                Thẻ ngân hàng
+              </label>
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  value="wallet"
+                  {...register("paymentMethod", { required: true })}
+                />
+                Ví điện tử
+              </label>
+            </div>
+            {errors.paymentMethod && (
+              <p className="text-sm text-red-600">
+                Chọn phương thức thanh toán
+              </p>
+            )}
 
             <button
               type="submit"
               disabled={isSubmitting}
               className="mt-2 w-full rounded-md bg-primary px-4 py-2 text-white hover:opacity-90 disabled:opacity-60"
             >
-              {isSubmitting ? 'Placing Order…' : 'Place Order'}
+              {isSubmitting ? "Placing Order…" : "Place Order"}
             </button>
           </form>
 
@@ -267,22 +396,32 @@ export default function Checkout() {
           <div className="lg:col-span-5">
             <div className="rounded-lg border bg-white p-4">
               <h2 className="mb-3 text-lg font-semibold">Order Summary</h2>
-           <p className="mb-2 text-sm text-gray-600">
-                Items: <span className="font-medium">{lines.reduce((a, l) => a + l.qty, 0)}</span>
+              <p className="mb-2 text-sm text-gray-600">
+                Items:{" "}
+                <span className="font-medium">
+                  {lines.reduce((a, l) => a + l.qty, 0)}
+                </span>
                 <span className="mx-2">•</span>
-                Subtotal: <span className="font-medium">{formatCurrency(subtotal)}</span>
+                Subtotal:{" "}
+                <span className="font-medium">{formatCurrency(subtotal)}</span>
               </p>
               <div className="space-y-3">
                 {lines.map((l) => (
                   <div key={l.productId} className="flex items-start gap-3">
                     <img
-                      src={l.product?.thumbnail || l.product?.images?.[0] || '/img/placeholder.jpg'}
+                      src={
+                        l.product?.thumbnail ||
+                        l.product?.images?.[0] ||
+                        "/img/placeholder.jpg"
+                      }
                       alt={l.product?.name ?? l.productId}
                       className="h-14 w-14 rounded object-cover"
                       loading="lazy"
                     />
                     <div className="min-w-0 flex-1">
-                      <div className="line-clamp-1 text-sm font-medium">{l.product?.name ?? l.productId}</div>
+                      <div className="line-clamp-1 text-sm font-medium">
+                        {l.product?.name ?? l.productId}
+                      </div>
                       <div className="text-xs text-gray-500">Qty: {l.qty}</div>
                     </div>
                     <div className="text-sm font-semibold">
@@ -295,7 +434,9 @@ export default function Checkout() {
               <div className="mt-4 border-t pt-4 text-sm">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span className="font-semibold">{formatCurrency(subtotal)}</span>
+                  <span className="font-semibold">
+                    {formatCurrency(subtotal)}
+                  </span>
                 </div>
                 {/* Shipping/Tax placeholders */}
                 <div className="mt-1 flex justify-between text-gray-600">
@@ -308,16 +449,18 @@ export default function Checkout() {
                 </div>
                 <div className="mt-3 flex justify-between text-base">
                   <span className="font-semibold">Total</span>
-                  <span className="font-bold text-primary">{formatCurrency(subtotal + shippingFee)}</span>
+                  <span className="font-bold text-primary">
+                    {formatCurrency(subtotal + shippingFee)}
+                  </span>
                 </div>
 
-                    <button onClick={() => navigate('/cart')}
-                         className="mt-4 inline-block rounded-md border bg-white px-4 py-2 text-sm hover:bg-gray-50"
-                         type="button"
+                <button
+                  onClick={() => navigate("/cart")}
+                  className="mt-4 inline-block rounded-md border bg-white px-4 py-2 text-sm hover:bg-gray-50"
+                  type="button"
                 >
-                             Back to Cart
-                    </button>
-               
+                  Back to Cart
+                </button>
               </div>
             </div>
           </div>
