@@ -1,18 +1,18 @@
 // src/pages/Products.tsx
-import { useEffect, useMemo, useState, type ChangeEvent } from 'react';
-import Container from '@/components/layout/Container';
-import { getProducts } from '@/lib/fetcher';
-import type { Product } from '@/type';
-import ProductCard from '@/components/product/ProductCard';
+import { useEffect, useMemo, useState, type ChangeEvent } from "react";
+import Container from "@/components/layout/Container";
+import { getProducts } from "@/lib/fetcher";
+import type { Product } from "@/type";
+import ProductCard from "@/components/product/ProductCard";
 
 /** Strongly-typed sort options for the select */
-type SortOption = 'name-asc' | 'price-asc' | 'price-desc';
+type SortOption = "name-asc" | "price-asc" | "price-desc";
 
 /** Label + value for rendering the select without any casts */
 const SORT_OPTIONS = [
-  { label: 'Name A→Z', value: 'name-asc' },
-  { label: 'Price: Low to High', value: 'price-asc' },
-  { label: 'Price: High to Low', value: 'price-desc' },
+  { label: "Name A→Z", value: "name-asc" },
+  { label: "Price: Low to High", value: "price-asc" },
+  { label: "Price: High to Low", value: "price-desc" },
 ] as const;
 
 /**
@@ -21,7 +21,7 @@ const SORT_OPTIONS = [
  * Output: narrowed SortOption or null
  */
 function toSortOption(val: string): SortOption | null {
-  return SORT_OPTIONS.find(o => o.value === val)?.value ?? null;
+  return SORT_OPTIONS.find((o) => o.value === val)?.value ?? null;
 }
 
 /**
@@ -30,7 +30,7 @@ function toSortOption(val: string): SortOption | null {
  * Output: grid of ProductCard sorted by the selected option
  */
 export default function Products() {
-  const [sort, setSort] = useState<SortOption>('name-asc');
+  const [sort, setSort] = useState<SortOption>("name-asc");
   const [data, setData] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -43,7 +43,7 @@ export default function Products() {
     let alive = true;
     setLoading(true);
     getProducts()
-      .then(res => {
+      .then((res) => {
         if (!alive) return;
         setData(res);
       })
@@ -62,11 +62,12 @@ export default function Products() {
    */
   const sorted = useMemo(() => {
     const arr = [...data];
-    const comparators: Record<SortOption, (a: Product, b: Product) => number> = {
-      'name-asc': (a, b) => a.name.localeCompare(b.name),
-      'price-asc': (a, b) => a.price - b.price,
-      'price-desc': (a, b) => b.price - a.price,
-    };
+    const comparators: Record<SortOption, (a: Product, b: Product) => number> =
+      {
+        "name-asc": (a, b) => a.name.localeCompare(b.name),
+        "price-asc": (a, b) => a.price - b.price,
+        "price-desc": (a, b) => b.price - a.price,
+      };
     return arr.sort(comparators[sort]);
   }, [data, sort]);
 
@@ -83,8 +84,8 @@ export default function Products() {
   return (
     <Container>
       {/* Sort control */}
-      <div className="mb-3 flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Products</h2>
+      <section className="bg-blue-100 flex items-center justify-between py-4 px-4">
+        <h1 className="text-2xl font-semibold text-blue-900 py-3 px-4">All Products</h1>
         <div className="flex items-center gap-2 text-sm">
           <span className="text-gray-600">Sort by:</span>
           <select
@@ -92,14 +93,14 @@ export default function Products() {
             onChange={handleSortChange}
             className="h-9 rounded-md border border-gray-300 px-2"
           >
-            {SORT_OPTIONS.map(opt => (
+            {SORT_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value}>
                 {opt.label}
               </option>
             ))}
           </select>
         </div>
-      </div>
+      </section>
 
       {/* Grid */}
       {loading ? (
@@ -108,7 +109,7 @@ export default function Products() {
         <div className="py-10 text-gray-600">No products found.</div>
       ) : (
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-3">
-          {sorted.map(p => (
+          {sorted.map((p) => (
             <ProductCard key={p.id} p={p} />
           ))}
         </div>

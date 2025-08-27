@@ -10,7 +10,6 @@ import { useSearchParams } from "react-router-dom";
 import Spinner from "@/components/ui/Spinner";
 import CompareModal from "@/components/compare/CompareModal";
 
-
 /**
  * Reusable compare toggle button for Wishlist cards (Category style).
  * Input: productId (string), onOpen optional
@@ -250,7 +249,9 @@ export default function Wishlist() {
   if (list.length === 0) {
     return (
       <Container>
-        <h2 className="py-4 text-xl font-semibold">Your Wishlist</h2>
+        <h2 className="py-4 text-2xl text-blue-900 font-semibold">
+          Your Wishlist
+        </h2>
         <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
           <div className="text-sm text-gray-600">{filtered.length} item(s)</div>
           <div className="flex items-center gap-4">
@@ -313,7 +314,9 @@ export default function Wishlist() {
 
   return (
     <Container>
-      <h2 className="py-4 text-xl font-semibold">Your Wishlist</h2>
+      <h2 className="py-4 text-2xl text-blue-900 font-semibold">
+        Your Wishlist
+      </h2>
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
         <div className="text-sm text-gray-600">{filtered.length} item(s)</div>
         <div className="flex items-center gap-4">

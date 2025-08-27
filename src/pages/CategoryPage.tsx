@@ -4,8 +4,8 @@ import Container from "@/components/layout/Container";
 import useProductsByCategorySlug from "@/hooks/useProductsByCategory";
 import { useCompare } from "@/store/compare";
 
-import CompareModal from '@/components/compare/CompareModal';
-import ProductCard from '@/components/product/ProductCard';
+import CompareModal from "@/components/compare/CompareModal";
+import ProductCard from "@/components/product/ProductCard";
 
 /**
  * Input: sorted list and optional min/max (string from query)
@@ -165,8 +165,6 @@ function Pager({ page, totalPages }: { page: number; totalPages: number }) {
   );
 }
 
-
-
 /**
  * Main Category Page component
  */
@@ -225,9 +223,9 @@ export default function CategoryPage() {
 
   return (
     <Container>
-      <section className="pt-2 pb-8">
+      <section className="pt-2 pb-8 py-4">
         <div className="sticky top-[96px] z-40 bg-gray-50/90 backdrop-blur supports-[backdrop-filter]:bg-gray-50/80">
-          <h2 className="px-4 pt-[15px] pb-3  text-xl font-semibold">
+          <h2 className="px-4 pt-[15px] pb-3  text-2xl font-semibold text-blue-900">
             {isAll ? "All Products" : `Category: ${slug}`}
           </h2>
           <div className="flex items-center justify-between px-4 pb-3">
@@ -305,13 +303,14 @@ export default function CategoryPage() {
 
             {/* Floating Compare button (only when having selections) */}
             {compare.ids.length > 0 && (
-              <div className="fixed bottom-5 right-5 z-40">
-                
-              </div>
+              <div className="fixed bottom-5 right-5 z-40"></div>
             )}
 
             {/* Compare Modal (extracted component) */}
-            <CompareModal open={compareOpen} onClose={() => setCompareOpen(false)} />
+            <CompareModal
+              open={compareOpen}
+              onClose={() => setCompareOpen(false)}
+            />
           </>
         )}
       </section>

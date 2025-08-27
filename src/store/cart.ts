@@ -49,6 +49,22 @@ const persistCart = (items: Array<{ productId: string; quantity: number }>) => {
  */
 export const useCart = create<CartState>((set, get) => ({
     ...loadCart(),
+    /**
+     * Input: array of cart items
+     * Process: + If cart empty => return 0
+     *          + baseCode = 20k 
+     *          + total = baseCode + 2k * each quanity of item
+     * Output: estimateShipping
+     */
+    estimateShipping: () => {
+      const {items}  = get();
+      if(items.length === 0)return 0;
+      const base = 20000;
+      const perItem = items.reduce((sum,it)=> sum + it.quantity * 2000,0);
+      return base + perItem;
+
+    },
+
 
 
   /**
