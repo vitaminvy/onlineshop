@@ -93,7 +93,7 @@ export default function Checkout() {
     totalItems
   );
   const tax = subtotal * 0.08;
-  const total = shippingFee + subtotal;
+  const total = shippingFee + subtotal + tax;
 
   /**
    * Input: none
@@ -450,7 +450,7 @@ export default function Checkout() {
                 <div className="mt-3 flex justify-between text-base">
                   <span className="font-semibold">Total</span>
                   <span className="font-bold text-primary">
-                    {formatCurrency(subtotal + shippingFee)}
+                    {formatCurrency(total)}
                   </span>
                 </div>
 
