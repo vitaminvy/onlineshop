@@ -15,7 +15,7 @@ export default function Orders() {
   type OrderRow = {
     id: string;
     createdAt: string;
-    subtotal: number;
+    total: number;
     items: Array<{ id: string; name: string; qty: number; price: number }>;
     customer?: {
       fullName: string;
@@ -71,7 +71,7 @@ export default function Orders() {
                   </div>
                 </div>
                 <div className="shrink-0 font-semibold text-ink group-hover:text-primary">
-                  {formatCurrency(o.subtotal)}
+                  {formatCurrency(o.total)}
                 </div>
               </button>
             ))}
