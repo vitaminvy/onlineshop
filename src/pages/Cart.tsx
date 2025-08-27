@@ -7,8 +7,6 @@ import { products as SOURCE } from "@/data/products";
 import type { CartItem } from "@/type";
 import { toast } from "sonner";
 import { useState } from "react";
-import { estimateShipping } from "@/lib/shipping";
-
 
 /**
  * Input: cart store
@@ -64,7 +62,7 @@ export default function Cart() {
     (acc: number, l: CartLine) => acc + (l.product?.price ?? 0) * l.qty,
     0
   );
-  const shippingFee = estimateShipping(subtotal, totalItems);
+
   // Empty state
   if (lines.length === 0) {
     return (
@@ -89,7 +87,9 @@ export default function Cart() {
               <circle cx="18" cy="20" r="1.5" fill="currentColor" />
             </svg>
           </div>
-          <div className="text-lg font-medium text-ink">Your cart is empty</div>
+          <div className="text-lg font-medium text-ink ">
+            Your cart is empty
+          </div>
 
           <Link
             to="/category/all"
@@ -111,8 +111,8 @@ export default function Cart() {
 
   return (
     <Container>
-      <div className="py-10">
-        <h1 className="text-xl font-semibold">Your Cart</h1>
+      <div className="py-4">
+        <h1 className="text-2xl font-semibold text-blue-900">Your Cart</h1>
 
         <div className="mt-6 grid gap-4 lg:grid-cols-12">
           {/* Line items */}
@@ -318,21 +318,14 @@ export default function Cart() {
                 <span>Items</span>
                 <span className="font-medium">{totalItems}</span>
               </div>
-              
+
               <div className="mt-2 flex justify-between text-sm">
                 <span>Subtotal</span>
                 <span className="font-semibold">
                   {formatCurrency(subtotal)}
                 </span>
               </div>
-              <div className="mt-2 flex justify-between text-sm">
-                <span>Estimated Shipping</span>
-                <span className="font-semibold">{formatCurrency(shippingFee)}</span>
-              </div>
-              <div className="mt-2 flex justify-between text-sm">
-                <span>Total</span>
-                <span className="font-bold">{formatCurrency(subtotal + shippingFee)}</span>
-              </div>
+
               <button
                 onClick={() => navigate("/checkout")}
                 className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-center text-white hover:opacity-90"
