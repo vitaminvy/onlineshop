@@ -2,53 +2,12 @@ import Container from "@/components/layout/Container";
 import { useWishlist } from "@/store/wishlist";
 import { products as SOURCE } from "@/data/products";
 import { Link } from "react-router-dom";
-import { formatCurrency } from "@/lib/format";
 import { useState } from "react";
-import { useCompare } from "@/store/compare";
-import { toast } from "sonner";
 import { useSearchParams } from "react-router-dom";
 import Spinner from "@/components/ui/Spinner";
 import CompareModal from "@/components/compare/CompareModal";
+import ProductCard from "@/components/product/ProductCard";
 
-/**
- * Reusable compare toggle button for Wishlist cards (Category style).
- * Input: productId (string), onOpen optional
- * Process: toggle compare store; open modal when adding
- * Output: 'Compare' / 'Compared' button
- */
-function CompareButton({
-  productId,
-  onOpen,
-}: {
-  productId: string;
-  onOpen?: () => void;
-}) {
-  const compare = useCompare();
-  const isOn = compare.has(productId);
-
-  return (
-    <button
-      type="button"
-      aria-label={isOn ? "Remove from compare" : "Add to compare"}
-      title={isOn ? "Remove from compare" : "Add to compare"}
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const wasOn = compare.has(productId);
-        compare.toggle(productId);
-        if (!wasOn && onOpen) onOpen();
-        toast.success(wasOn ? "Removed from compare" : "Added to compare");
-      }}
-      className={`ml-2 shrink-0 rounded-md border px-2 py-1 text-xs ${
-        isOn
-          ? "border-blue-600 bg-blue-50 text-blue-700"
-          : "border-blue-500 bg-white text-blue-600 hover:bg-blue-50 active:opacity-60"
-      }`}
-    >
-      {isOn ? "Compared" : "Compare"}
-    </button>
-  );
-}
 /**
  * Input: product list and sort key
  * Process: clone and sort by selected strategy
@@ -384,37 +343,7 @@ export default function Wishlist() {
         <>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {paged.map((p) => (
-              <Link
-                key={p.id}
-                to={`/product/${p.slug}`}
-                className="group block overflow-hidden rounded-lg border bg-white transition hover:shadow"
-              >
-                <div className="aspect-[4/3] w-full overflow-hidden bg-gray-50">
-                  <img
-                    src={p.thumbnail ?? p.images?.[0] ?? ""}
-                    alt={p.name}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-3">
-                  <div className="flex items-start justify-between">
-                    <h3 className="line-clamp-1 text-sm font-medium text-gray-900">
-                      {p.name}
-                    </h3>
-                    <div className="flex items-center">
-                      <CompareButton
-                        productId={p.id}
-                        onOpen={() => setCompareOpen(true)}
-                      />
-                    </div>
-                  </div>
-                  <p className="text-xs text-gray-500">{p.brand}</p>
-                  <p className="text-base font-semibold text-emerald-600">
-                    {formatCurrency(p.price)}
-                  </p>
-                </div>
-              </Link>
+              <ProductCard key={p.id} p={p} />
             ))}
           </div>
           <Pager page={page} totalPages={totalPages} />
