@@ -415,7 +415,15 @@ export default function Navbar() {
           setRegisterOpen(true);
         }}
       />
-      <RegisterModal isOpen={registerOpen} onClose={() => setRegisterOpen(false)} />
+      <RegisterModal
+        isOpen={registerOpen}
+        onClose={() => setRegisterOpen(false)}
+        // Allow user to switch from RegisterModal to LoginModal (for "Already have an account? Login" flow)
+        onSwitchToLogin={() => {
+          setRegisterOpen(false);
+          setLoginOpen(true);
+        }}
+      />
     </header>
   );
 }

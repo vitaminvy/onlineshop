@@ -44,7 +44,7 @@ export default function LoginModal({
         {/* Right: Login Form */}
         <div className="flex flex-col justify-center p-8">
           <div className="flex flex-col items-center mb-8">
-            <img src="/logo.svg" alt="Logo" className="w-14 h-14 mb-2" />
+            <img src="/images/logo.jpg" alt="Logo" className="w-14 h-14 mb-2 rounded-full" />
             <h2 className="text-2xl font-bold text-gray-800 mb-1">
               Nice to see you again
             </h2>
@@ -57,7 +57,7 @@ export default function LoginModal({
               <input
                 type="text"
                 placeholder="you@example.com or 0909xxxxxx"
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="w-full rounded-2xl border-2 border-gray-300 px-4 py-3 focus:border-blue-600 focus:ring-4 focus:ring-blue-200 outline-none transition"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoFocus
@@ -71,14 +71,14 @@ export default function LoginModal({
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 outline-none pr-10"
+                  className="w-full rounded-2xl border-2 border-gray-300 px-4 py-3 pr-12 focus:border-blue-600 focus:ring-4 focus:ring-blue-200 outline-none transition"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <button
                   type="button"
                   tabIndex={-1}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-xl text-gray-400 bg-transparent focus:outline-none focus:ring-0 border-none"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xl text-gray-400 bg-transparent focus:outline-none focus:ring-0 border-none"
                   onClick={() => setShowPassword((v) => !v)}
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
