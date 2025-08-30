@@ -5,6 +5,7 @@ import Container from "@/components/layout/Container";
 import { formatCurrency } from "@/lib/format";
 import { useEffect, useState } from "react";
 import Spinner from "@/components/ui/Spinner";
+import FilterBar from "@/components/product/FilterBar";
 import { toast } from "sonner";
 import { useCompare } from "@/store/compare";
 // Remove in-memory products source import
@@ -49,97 +50,6 @@ function applyPriceFilter<T extends { price: number }>(
   const max = maxStr ? Number(maxStr) : Infinity;
 
   return list.filter((p) => p.price >= min && p.price <= max);
-}
-/**
- * Small sort control bound to URL query string.
- */
-function SortSelect() {
-  const [params, setParams] = useSearchParams();
-  const sort = params.get("sort") ?? "relevance";
-
-  /**
-   * Input: select value
-   * Process: update query param 'sort' and reset page to 1
-   * Output: new URL reflecting selected sort
-   */
-  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    params.set("sort", e.target.value);
-    params.set("page", "1");
-    setParams(params, { replace: true });
-  };
-
-  return (
-    <label className="flex items-center gap-2 text-sm">
-      <span className="text-gray-600">Sort</span>
-      <select
-        value={sort}
-        onChange={onChange}
-        className="rounded-md border px-2 py-1 text-sm"
-      >
-        <option value="relevance">Relevance</option>
-        <option value="price_asc">Price ↑</option>
-        <option value="price_desc">Price ↓</option>
-        <option value="newest">Newest</option>
-      </select>
-    </label>
-  );
-}
-
-/**
- * Price range filter bound to URL query string.
- */
-function PriceFilter() {
-  const [params, setParams] = useSearchParams();
-  const [min, setMin] = useState(params.get("min") ?? "");
-  const [max, setMax] = useState(params.get("max") ?? "");
-  const [applying, setApplying] = useState(false);
-
-  /**
-   * Input: local min/max
-   * Process: write query params and reset page to 1
-   * Output: URL reflects filter; list re-renders
-   */
-  const apply = () => {
-    setApplying(true);
-    if (min) params.set("min", min);
-    else params.delete("min");
-    if (max) params.set("max", max);
-    else params.delete("max");
-    params.set("page", "1");
-    setParams(params, { replace: true });
-    // Small timeout just to show feedback; remove if không cần
-    setTimeout(() => setApplying(false), 150);
-  };
-
-  return (
-    <div className="flex items-center gap-2 text-sm">
-      <span className="text-gray-600">Price</span>
-      <input
-        type="number"
-        placeholder="Min"
-        value={min}
-        onChange={(e) => setMin(e.target.value)}
-        className="w-24 rounded-md border px-2 py-1"
-      />
-      <span>—</span>
-      <input
-        type="number"
-        placeholder="Max"
-        value={max}
-        onChange={(e) => setMax(e.target.value)}
-        className="w-24 rounded-md border px-2 py-1"
-      />
-      <button
-        type="button"
-        onClick={apply}
-        disabled={applying}
-        className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-1 text-white hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
-      >
-        {applying && <Spinner />}
-        Apply
-      </button>
-    </div>
-  );
 }
 
 /**
@@ -466,18 +376,14 @@ export default function SearchPage() {
     <Container>
       <h2 className="py-4 text-xl font-semibold">Search results for: "{q}"</h2>
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-        <div className="text-sm text-gray-600">{filtered.length} result(s)</div>
-        <div className="flex items-center gap-4">
-          <PriceFilter />
-          <SortSelect />
-          <button
-            type="button"
-            onClick={() => setCompareOpen(true)}
-            className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-white shadow-lg hover:opacity-90"
-          >
-            Compare
-          </button>
-        </div>
+        <FilterBar total={filtered.length} />
+        <button
+          type="button"
+          onClick={() => setCompareOpen(true)}
+          className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-white shadow-lg hover:opacity-90"
+        >
+          Compare
+        </button>
       </div>
       {loading && (
         <div className="rounded-lg border bg-white p-8 text-center text-gray-600">

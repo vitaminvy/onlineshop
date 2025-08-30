@@ -4,9 +4,9 @@ import { products as SOURCE } from "@/data/products";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import Spinner from "@/components/ui/Spinner";
 import CompareModal from "@/components/compare/CompareModal";
 import ProductCard from "@/components/product/ProductCard";
+import FilterBar from "@/components/product/FilterBar";
 
 /**
  * Input: product list and sort key
@@ -43,96 +43,6 @@ function applyPriceFilter<T extends { price: number }>(
   const min = minStr ? Number(minStr) : -Infinity;
   const max = maxStr ? Number(maxStr) : Infinity;
   return list.filter((p) => p.price >= min && p.price <= max);
-}
-/**
- * Small sort control bound to URL query string.
- */
-function SortSelect() {
-  const [params, setParams] = useSearchParams();
-  const sort = params.get("sort") ?? "relevance";
-
-  /**
-   * Input: select value
-   * Process: update query param 'sort' and reset page to 1
-   * Output: new URL reflecting selected sort
-   */
-  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    params.set("sort", e.target.value);
-    params.set("page", "1");
-    setParams(params, { replace: true });
-  };
-
-  return (
-    <label className="flex items-center gap-2 text-sm">
-      <span className="text-gray-600">Sort</span>
-      <select
-        value={sort}
-        onChange={onChange}
-        className="rounded-md border px-2 py-1 text-sm"
-      >
-        <option value="relevance">Relevance</option>
-        <option value="price_asc">Price ↑</option>
-        <option value="price_desc">Price ↓</option>
-        <option value="newest">Newest</option>
-      </select>
-    </label>
-  );
-}
-
-/**
- * Price range filter bound to URL query string.
- */
-function PriceFilter() {
-  const [params, setParams] = useSearchParams();
-  const [min, setMin] = useState(params.get("min") ?? "");
-  const [max, setMax] = useState(params.get("max") ?? "");
-  const [applying, setApplying] = useState(false);
-
-  /**
-   * Input: local min/max
-   * Process: write query params and reset page to 1
-   * Output: URL reflects filter; list re-renders
-   */
-  const apply = () => {
-    setApplying(true);
-    if (min) params.set("min", min);
-    else params.delete("min");
-    if (max) params.set("max", max);
-    else params.delete("max");
-    params.set("page", "1");
-    setParams(params, { replace: true });
-    setTimeout(() => setApplying(false), 150);
-  };
-
-  return (
-    <div className="flex items-center gap-2 text-sm">
-      <span className="text-gray-600">Price</span>
-      <input
-        type="number"
-        placeholder="Min"
-        value={min}
-        onChange={(e) => setMin(e.target.value)}
-        className="w-24 rounded-md border px-2 py-1"
-      />
-      <span>—</span>
-      <input
-        type="number"
-        placeholder="Max"
-        value={max}
-        onChange={(e) => setMax(e.target.value)}
-        className="w-24 rounded-md border px-2 py-1"
-      />
-      <button
-        type="button"
-        onClick={apply}
-        disabled={applying}
-        className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-1 text-white hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
-      >
-        {applying && <Spinner />}
-        Apply
-      </button>
-    </div>
-  );
 }
 
 /**
@@ -211,12 +121,8 @@ export default function Wishlist() {
         <h2 className="py-4 text-2xl text-blue-900 font-semibold">
           Your Wishlist
         </h2>
-        <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-          <div className="text-sm text-gray-600">{filtered.length} item(s)</div>
-          <div className="flex items-center gap-4">
-            <PriceFilter />
-            <SortSelect />
-          </div>
+        <div className="mb-3">
+          <FilterBar total={filtered.length} />
         </div>
         <div className="rounded-lg border bg-white p-10 text-center">
           <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gray-100">
@@ -276,12 +182,8 @@ export default function Wishlist() {
       <h2 className="py-4 text-2xl text-blue-900 font-semibold">
         Your Wishlist
       </h2>
-      <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-        <div className="text-sm text-gray-600">{filtered.length} item(s)</div>
-        <div className="flex items-center gap-4">
-          <PriceFilter />
-          <SortSelect />
-        </div>
+      <div className="mb-3">
+        <FilterBar total={filtered.length} />
       </div>
 
       {filtered.length === 0 ? (
