@@ -3,6 +3,7 @@ import { useParams, Link, useSearchParams } from "react-router-dom";
 import Container from "@/components/layout/Container";
 import useProductsByCategorySlug from "@/hooks/useProductsByCategory";
 import { useCompare } from "@/store/compare";
+import FilterBar from "@/components/product/FilterBar";
 
 import CompareModal from "@/components/compare/CompareModal";
 import ProductCard from "@/components/product/ProductCard";
@@ -42,92 +43,6 @@ function applySort<T extends { price: number; createdAt?: number }>(
     default:
       return arr; // relevance (keep incoming order)
   }
-}
-
-/**
- * Small sort control bound to URL query string.
- */
-function SortSelect() {
-  const [params, setParams] = useSearchParams();
-  const sort = params.get("sort") ?? "relevance";
-
-  /**
-   * Input: select value
-   * Process: update query param 'sort' and reset page to 1
-   * Output: new URL reflecting selected sort
-   */
-  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    params.set("sort", e.target.value);
-    params.set("page", "1");
-    setParams(params, { replace: true });
-  };
-
-  return (
-    <label className="flex items-center gap-2 text-sm">
-      <span className="text-gray-600">Sort</span>
-      <select
-        value={sort}
-        onChange={onChange}
-        className="rounded-md border px-2 py-1 text-sm"
-      >
-        <option value="relevance">Relevance</option>
-        <option value="price_asc">Price ↑</option>
-        <option value="price_desc">Price ↓</option>
-        <option value="newest">Newest</option>
-      </select>
-    </label>
-  );
-}
-
-/**
- * Price range filter bound to URL query string.
- */
-function PriceFilter() {
-  const [params, setParams] = useSearchParams();
-  const [min, setMin] = useState(params.get("min") ?? "");
-  const [max, setMax] = useState(params.get("max") ?? "");
-
-  /**
-   * Input: local min/max
-   * Process: write query params and reset page to 1
-   * Output: URL reflects filter; list re-renders
-   */
-  const apply = () => {
-    if (min) params.set("min", min);
-    else params.delete("min");
-    if (max) params.set("max", max);
-    else params.delete("max");
-    params.set("page", "1");
-    setParams(params, { replace: true });
-  };
-
-  return (
-    <div className="flex items-center gap-2 text-sm">
-      <span className="text-gray-600">Price</span>
-      <input
-        type="number"
-        placeholder="Min"
-        value={min}
-        onChange={(e) => setMin(e.target.value)}
-        className="w-24 rounded-md border px-2 py-1"
-      />
-      <span>—</span>
-      <input
-        type="number"
-        placeholder="Max"
-        value={max}
-        onChange={(e) => setMax(e.target.value)}
-        className="w-24 rounded-md border px-2 py-1"
-      />
-      <button
-        type="button"
-        onClick={apply}
-        className="rounded-md bg-primary px-3 py-1 text-white hover:opacity-90"
-      >
-        Apply
-      </button>
-    </div>
-  );
 }
 
 /**
@@ -225,17 +140,11 @@ export default function CategoryPage() {
     <Container>
       <section className="pt-2 pb-8 py-4">
         <div className="sticky top-[96px] z-40 bg-gray-50/90 backdrop-blur supports-[backdrop-filter]:bg-gray-50/80">
-          <h2 className="px-4 pt-[15px] pb-3  text-2xl font-semibold text-blue-900">
+          <h2 className="py-2  text-2xl font-semibold text-blue-900">
             {isAll ? "All Products" : `Category: ${slug}`}
           </h2>
-          <div className="flex items-center justify-between px-4 pb-3">
-            <div className="text-sm text-gray-600">
-              {filtered.length} result(s)
-            </div>
-            <SortSelect />
-          </div>
           <div className="px-4 pb-3">
-            <PriceFilter />
+            <FilterBar total={filtered.length} />
           </div>
         </div>
 

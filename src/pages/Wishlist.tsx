@@ -2,53 +2,12 @@ import Container from "@/components/layout/Container";
 import { useWishlist } from "@/store/wishlist";
 import { products as SOURCE } from "@/data/products";
 import { Link } from "react-router-dom";
-import { formatCurrency } from "@/lib/format";
 import { useState } from "react";
-import { useCompare } from "@/store/compare";
-import { toast } from "sonner";
 import { useSearchParams } from "react-router-dom";
-import Spinner from "@/components/ui/Spinner";
 import CompareModal from "@/components/compare/CompareModal";
+import ProductCard from "@/components/product/ProductCard";
+import FilterBar from "@/components/product/FilterBar";
 
-/**
- * Reusable compare toggle button for Wishlist cards (Category style).
- * Input: productId (string), onOpen optional
- * Process: toggle compare store; open modal when adding
- * Output: 'Compare' / 'Compared' button
- */
-function CompareButton({
-  productId,
-  onOpen,
-}: {
-  productId: string;
-  onOpen?: () => void;
-}) {
-  const compare = useCompare();
-  const isOn = compare.has(productId);
-
-  return (
-    <button
-      type="button"
-      aria-label={isOn ? "Remove from compare" : "Add to compare"}
-      title={isOn ? "Remove from compare" : "Add to compare"}
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const wasOn = compare.has(productId);
-        compare.toggle(productId);
-        if (!wasOn && onOpen) onOpen();
-        toast.success(wasOn ? "Removed from compare" : "Added to compare");
-      }}
-      className={`ml-2 shrink-0 rounded-md border px-2 py-1 text-xs ${
-        isOn
-          ? "border-blue-600 bg-blue-50 text-blue-700"
-          : "border-blue-500 bg-white text-blue-600 hover:bg-blue-50 active:opacity-60"
-      }`}
-    >
-      {isOn ? "Compared" : "Compare"}
-    </button>
-  );
-}
 /**
  * Input: product list and sort key
  * Process: clone and sort by selected strategy
@@ -84,96 +43,6 @@ function applyPriceFilter<T extends { price: number }>(
   const min = minStr ? Number(minStr) : -Infinity;
   const max = maxStr ? Number(maxStr) : Infinity;
   return list.filter((p) => p.price >= min && p.price <= max);
-}
-/**
- * Small sort control bound to URL query string.
- */
-function SortSelect() {
-  const [params, setParams] = useSearchParams();
-  const sort = params.get("sort") ?? "relevance";
-
-  /**
-   * Input: select value
-   * Process: update query param 'sort' and reset page to 1
-   * Output: new URL reflecting selected sort
-   */
-  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    params.set("sort", e.target.value);
-    params.set("page", "1");
-    setParams(params, { replace: true });
-  };
-
-  return (
-    <label className="flex items-center gap-2 text-sm">
-      <span className="text-gray-600">Sort</span>
-      <select
-        value={sort}
-        onChange={onChange}
-        className="rounded-md border px-2 py-1 text-sm"
-      >
-        <option value="relevance">Relevance</option>
-        <option value="price_asc">Price ↑</option>
-        <option value="price_desc">Price ↓</option>
-        <option value="newest">Newest</option>
-      </select>
-    </label>
-  );
-}
-
-/**
- * Price range filter bound to URL query string.
- */
-function PriceFilter() {
-  const [params, setParams] = useSearchParams();
-  const [min, setMin] = useState(params.get("min") ?? "");
-  const [max, setMax] = useState(params.get("max") ?? "");
-  const [applying, setApplying] = useState(false);
-
-  /**
-   * Input: local min/max
-   * Process: write query params and reset page to 1
-   * Output: URL reflects filter; list re-renders
-   */
-  const apply = () => {
-    setApplying(true);
-    if (min) params.set("min", min);
-    else params.delete("min");
-    if (max) params.set("max", max);
-    else params.delete("max");
-    params.set("page", "1");
-    setParams(params, { replace: true });
-    setTimeout(() => setApplying(false), 150);
-  };
-
-  return (
-    <div className="flex items-center gap-2 text-sm">
-      <span className="text-gray-600">Price</span>
-      <input
-        type="number"
-        placeholder="Min"
-        value={min}
-        onChange={(e) => setMin(e.target.value)}
-        className="w-24 rounded-md border px-2 py-1"
-      />
-      <span>—</span>
-      <input
-        type="number"
-        placeholder="Max"
-        value={max}
-        onChange={(e) => setMax(e.target.value)}
-        className="w-24 rounded-md border px-2 py-1"
-      />
-      <button
-        type="button"
-        onClick={apply}
-        disabled={applying}
-        className="inline-flex items-center gap-2 rounded-md bg-primary px-3 py-1 text-white hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
-      >
-        {applying && <Spinner />}
-        Apply
-      </button>
-    </div>
-  );
 }
 
 /**
@@ -252,12 +121,8 @@ export default function Wishlist() {
         <h2 className="py-4 text-2xl text-blue-900 font-semibold">
           Your Wishlist
         </h2>
-        <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-          <div className="text-sm text-gray-600">{filtered.length} item(s)</div>
-          <div className="flex items-center gap-4">
-            <PriceFilter />
-            <SortSelect />
-          </div>
+        <div className="mb-3">
+          <FilterBar total={filtered.length} />
         </div>
         <div className="rounded-lg border bg-white p-10 text-center">
           <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gray-100">
@@ -317,12 +182,8 @@ export default function Wishlist() {
       <h2 className="py-4 text-2xl text-blue-900 font-semibold">
         Your Wishlist
       </h2>
-      <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-        <div className="text-sm text-gray-600">{filtered.length} item(s)</div>
-        <div className="flex items-center gap-4">
-          <PriceFilter />
-          <SortSelect />
-        </div>
+      <div className="mb-3">
+        <FilterBar total={filtered.length} />
       </div>
 
       {filtered.length === 0 ? (
@@ -384,37 +245,7 @@ export default function Wishlist() {
         <>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {paged.map((p) => (
-              <Link
-                key={p.id}
-                to={`/product/${p.slug}`}
-                className="group block overflow-hidden rounded-lg border bg-white transition hover:shadow"
-              >
-                <div className="aspect-[4/3] w-full overflow-hidden bg-gray-50">
-                  <img
-                    src={p.thumbnail ?? p.images?.[0] ?? ""}
-                    alt={p.name}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-3">
-                  <div className="flex items-start justify-between">
-                    <h3 className="line-clamp-1 text-sm font-medium text-gray-900">
-                      {p.name}
-                    </h3>
-                    <div className="flex items-center">
-                      <CompareButton
-                        productId={p.id}
-                        onOpen={() => setCompareOpen(true)}
-                      />
-                    </div>
-                  </div>
-                  <p className="text-xs text-gray-500">{p.brand}</p>
-                  <p className="text-base font-semibold text-emerald-600">
-                    {formatCurrency(p.price)}
-                  </p>
-                </div>
-              </Link>
+              <ProductCard key={p.id} p={p} />
             ))}
           </div>
           <Pager page={page} totalPages={totalPages} />
