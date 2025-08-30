@@ -92,20 +92,31 @@ export default function ProductCard({ p }: { p: Product }) {
           {formatCurrency(p.price)}
         </div>
         {p.stock <= 0 ? (
-          <div className="mt-2 inline-flex rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
+          <div className="mt-2 inline-flex rounded border border-gray-400 bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
             Out of stock
           </div>
+        ) : p.stock < 20 ? (
+          <div className="mt-2 inline-flex rounded border border-yellow-400 bg-yellow-50 px-2 py-0.5 text-xs text-yellow-700">
+            Only {p.stock} left
+          </div>
         ) : (
-          <div className="mt-2 inline-flex rounded bg-green-50 px-2 py-0.5 text-xs text-green-700">
-            In stock
+          <div className="mt-2 inline-flex rounded border border-green-500 bg-green-50 px-2 py-0.5 text-xs text-green-700">
+            {p.stock} items
           </div>
         )}
       </Link>
       <button
-        className="mt-3 w-full inline-flex items-center justify-center gap-2 rounded bg-primary px-3 py-2 text-sm font-medium text-white hover:bg-primary/90"
+        disabled={p.stock <= 0}
+        className={`mt-3 w-full inline-flex items-center justify-center gap-2 rounded px-3 py-2 text-sm font-medium ${
+          p.stock <= 0
+            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+            : "bg-primary text-white hover:bg-primary/90"
+        }`}
         onClick={() => {
-          console.log("Add to Cart clicked", p.name);
-          useCart.getState().addToCart(p, 1);
+          if (p.stock > 0) {
+            console.log("Add to Cart clicked", p.name);
+            useCart.getState().addToCart(p, 1);
+          }
         }}
       >
         <ShoppingCartIcon className="h-4 w-4" />

@@ -31,7 +31,7 @@
       "https://picsum.photos/seed/atmega-328p-tqfp-32/640/480"
     ],
     "thumbnail": "https://picsum.photos/seed/atmega-328p-tqfp-32/640/480",
-    "stock": 27,
+    "stock": 19,
     "specs": {
       "family": "AVR",
       "voltage": "5V",
@@ -47,12 +47,12 @@
     "name": "ATmega 32U4 TQFP-44",
     "categoryId": "cat-ic",
     "brand": "Microchip",
-    "price": 69000,
+    "price": 19,
     "images": [
       "https://picsum.photos/seed/atmega-32u4-tqfp-44/640/480"
     ],
     "thumbnail": "https://picsum.photos/seed/atmega-32u4-tqfp-44/640/480",
-    "stock": 34,
+    "stock": 0,
     "specs": {
       "family": "AVR",
       "voltage": "5V",
