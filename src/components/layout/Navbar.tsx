@@ -7,6 +7,7 @@ import { useAuth } from "@/store/auth";
 import SearchBar from "@/components/search/SearchBar";
 import clsx from "clsx";
 import LoginModal from "@/components/auth/LoginModal";
+import RegisterModal from "@/components/auth/RegisterModal";
 import LogoutButton from "@/components/auth/LogoutButton";
 
 /**
@@ -20,6 +21,7 @@ export default function Navbar() {
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
+  const [registerOpen, setRegisterOpen] = useState(false);
 
   const handleProtectedClick = (e: React.MouseEvent, _path: string) => {
     if (!user) {
@@ -78,6 +80,25 @@ export default function Navbar() {
                 </svg>
               </button>
 
+              {/* Cart */}
+              <NavLink
+                to="/cart"
+                onClick={(e) => handleProtectedClick(e, "/cart")}
+
+                className={({ isActive }) =>
+                  isActive
+                    ? "relative inline-flex h-10 items-center rounded-md px-3 text-sm font-semibold text-primary border-b-2 border-primary"
+                    : "relative inline-flex h-10 items-center rounded-md px-3 text-sm text-gray-700 hover:bg-gray-100"
+                }
+              >
+                Cart
+                {totalQty > 0 && (
+                  <span className="absolute -right-2 -top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[10px] leading-none text-white">
+                    {totalQty}
+                  </span>
+                )}
+              </NavLink>
+
               {/* Desktop: links */}
               <div className="hidden items-center gap-2 sm:flex">
                 <NavLink
@@ -89,23 +110,6 @@ export default function Navbar() {
                   }
                 >
                   Products
-                </NavLink>
-                {/* Cart */}
-                <NavLink
-                  to="/cart"
-                  onClick={(e) => handleProtectedClick(e, "/cart")}
-                  className={({ isActive }) =>
-                    isActive
-                      ? "relative inline-flex h-10 items-center rounded-md px-3 text-sm font-semibold text-primary border-b-2 border-primary"
-                      : "relative inline-flex h-10 items-center rounded-md px-3 text-sm text-gray-700 hover:bg-gray-100"
-                  }
-                >
-                  Cart
-                  {totalQty > 0 && (
-                    <span className="absolute -right-2 -top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[10px] leading-none text-white">
-                      {totalQty}
-                    </span>
-                  )}
                 </NavLink>
                 <NavLink
                   to="/orders"
@@ -403,7 +407,15 @@ export default function Navbar() {
           </NavLink>
         </div>
       </div>
-      <LoginModal isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
+      <LoginModal
+        isOpen={loginOpen}
+        onClose={() => setLoginOpen(false)}
+        onSwitchToRegister={() => {
+          setLoginOpen(false);
+          setRegisterOpen(true);
+        }}
+      />
+      <RegisterModal isOpen={registerOpen} onClose={() => setRegisterOpen(false)} />
     </header>
   );
 }
