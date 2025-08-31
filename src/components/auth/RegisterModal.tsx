@@ -25,6 +25,9 @@ export default function RegisterModal({
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [avatar, setAvatar] = useState<File | null>(null);
   const { register } = useAuth();
 
   // Early return: Modal not open
@@ -40,6 +43,18 @@ export default function RegisterModal({
     e.preventDefault();
     try {
       // Register user, auto-login on success
+      // If your register function supports the new fields, uncomment below:
+      // await register(email, password, name, phone, address, avatar);
+      // onClose();
+      // If not, just log for now:
+      console.log("Register fields:", {
+        email,
+        password,
+        name,
+        phone,
+        address,
+        avatar,
+      });
       await register(email, password, name);
       onClose();
     } catch (err) {
@@ -64,9 +79,15 @@ export default function RegisterModal({
         {/* Right: Register form */}
         <div className="flex flex-col justify-center p-8">
           {/* Modal Title */}
-          <img src="/images/logo.jpg" alt="Logo" className="w-14 h-14 mb-2 rounded-full mx-auto" />
+          <img
+            src="/images/logo.jpg"
+            alt="Logo"
+            className="w-14 h-14 mb-2 rounded-full mx-auto"
+          />
 
-          <h2 className="mb-6 text-2xl font-bold text-center">Welcome to my shop</h2>
+          <h2 className="mb-6 text-2xl font-bold text-center">
+            Welcome to my shop
+          </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="text"
@@ -89,6 +110,57 @@ export default function RegisterModal({
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <input
+              type="text"
+              placeholder="Phone"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200 transition"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Address"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200 transition"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Avatar</label>
+              <input
+                id="avatar"
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files[0]) {
+                    setAvatar(e.target.files[0]);
+                  }
+                }}
+              />
+              <label
+                htmlFor="avatar"
+                className="flex items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-md cursor-pointer hover:border-blue-400 transition"
+              >
+                {avatar ? (
+                  <div className="relative h-full w-full flex items-center justify-center">
+                    <img
+                      src={URL.createObjectURL(avatar)}
+                      alt="Avatar preview"
+                      className="h-full w-auto object-cover rounded-md"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setAvatar(null)}
+                      className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ) : (
+                  <span className="text-gray-400">Click to upload avatar</span>
+                )}
+              </label>
+            </div>
             <div className="flex gap-2">
               {/* Register button */}
               <button

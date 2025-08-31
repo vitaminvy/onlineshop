@@ -4,7 +4,7 @@ import { useAuth } from "@/store/auth";
 import { JSX } from "react";
 
 export default function ProtectedRoute({ children }: { children: JSX.Element }) {
-  const { user } = useAuth();
-  if (!user) return <Navigate to="/" replace />;
+  const { client } = useAuth();
+  if (!client) return <Navigate to="/" replace />;
   return children;
 }
