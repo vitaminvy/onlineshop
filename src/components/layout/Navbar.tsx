@@ -17,14 +17,14 @@ import LogoutButton from "@/components/auth/LogoutButton";
  */
 export default function Navbar() {
   const totalQty = useCart((s) => s.totalQty);
-  const { user } = useAuth();
+  const { client } = useAuth();
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [registerOpen, setRegisterOpen] = useState(false);
 
   const handleProtectedClick = (e: React.MouseEvent, _path: string) => {
-    if (!user) {
+    if (!client) {
       e.preventDefault();
       setLoginOpen(true);
     }
@@ -158,10 +158,10 @@ export default function Navbar() {
             </nav>
           </div>
           <div className="flex items-center">
-            {user ? (
+            {client ? (
               <div className="flex items-center gap-2">
                 <button className="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md cursor-default">
-                  {user.name}
+                  {client.name}
                 </button>
                 <LogoutButton />
               </div>
