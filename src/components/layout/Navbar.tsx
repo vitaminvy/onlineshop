@@ -160,9 +160,12 @@ export default function Navbar() {
           <div className="flex items-center">
             {client ? (
               <div className="flex items-center gap-2">
-                <button className="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md cursor-default">
+                <Link
+                  to="/profile"
+                  className="px-3 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:text-primary hover:bg-gray-200"
+                >
                   {client.name}
-                </button>
+                </Link>
                 <LogoutButton />
               </div>
             ) : (
