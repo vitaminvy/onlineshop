@@ -1,0 +1,1917 @@
+{
+  "products": [
+  {
+    "id": "ic-1",
+    "slug": "atmega-328p-dip-28",
+    "name": "ATmega 328P DIP-28",
+    "categoryId": "cat-ic",
+    "brand": "Microchip",
+    "price": 45000,
+    "images": [
+      "https://picsum.photos/seed/atmega-328p-dip-28/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/atmega-328p-dip-28/640/480",
+    "stock": 20,
+    "specs": {
+      "family": "AVR",
+      "voltage": "5V",
+      "package": "DIP-28",
+      "speed": "20MHz"
+    },
+    "shortDesc": "ATmega variant 328P DIP-28",
+    "isFeatured": true
+  },
+  {
+    "id": "ic-2",
+    "slug": "atmega-328p-tqfp-32",
+    "name": "ATmega 328P TQFP-32",
+    "categoryId": "cat-ic",
+    "brand": "Microchip",
+    "price": 48000,
+    "images": [
+      "https://picsum.photos/seed/atmega-328p-tqfp-32/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/atmega-328p-tqfp-32/640/480",
+    "stock": 19,
+    "specs": {
+      "family": "AVR",
+      "voltage": "5V",
+      "package": "TQFP-32",
+      "speed": "20MHz"
+    },
+    "shortDesc": "ATmega variant 328P TQFP-32",
+    "isFeatured": false
+  },
+  {
+    "id": "ic-3",
+    "slug": "atmega-32u4-tqfp-44",
+    "name": "ATmega 32U4 TQFP-44",
+    "categoryId": "cat-ic",
+    "brand": "Microchip",
+    "price": 19,
+    "images": [
+      "https://picsum.photos/seed/atmega-32u4-tqfp-44/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/atmega-32u4-tqfp-44/640/480",
+    "stock": 0,
+    "specs": {
+      "family": "AVR",
+      "voltage": "5V",
+      "package": "TQFP-44",
+      "usb": "Yes"
+    },
+    "shortDesc": "ATmega variant 32U4 TQFP-44",
+    "isFeatured": false
+  },
+  {
+    "id": "ic-4",
+    "slug": "atmega-16a-dip-40",
+    "name": "ATmega 16A DIP-40",
+    "categoryId": "cat-ic",
+    "brand": "Microchip",
+    "price": 52000,
+    "images": [
+      "https://picsum.photos/seed/atmega-16a-dip-40/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/atmega-16a-dip-40/640/480",
+    "stock": 41,
+    "specs": {
+      "family": "AVR",
+      "voltage": "5V",
+      "package": "DIP-40",
+      "speed": "16MHz"
+    },
+    "shortDesc": "ATmega variant 16A DIP-40",
+    "isFeatured": false
+  },
+  {
+    "id": "ic-5",
+    "slug": "atmega-644p-dip-40",
+    "name": "ATmega 644P DIP-40",
+    "categoryId": "cat-ic",
+    "brand": "Microchip",
+    "price": 65000,
+    "images": [
+      "https://picsum.photos/seed/atmega-644p-dip-40/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/atmega-644p-dip-40/640/480",
+    "stock": 48,
+    "specs": {
+      "family": "AVR",
+      "voltage": "5V",
+      "package": "DIP-40",
+      "flash": "64KB"
+    },
+    "shortDesc": "ATmega variant 644P DIP-40",
+    "isFeatured": false
+  },
+  {
+    "id": "ic-ti-1",
+    "slug": "lm-7805-regulator-to-220",
+    "name": "LM 7805 Regulator TO-220",
+    "categoryId": "cat-ic",
+    "brand": "Texas Instruments",
+    "price": 9000,
+    "images": [
+      "https://picsum.photos/seed/lm-7805-regulator-to-220/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/lm-7805-regulator-to-220/640/480",
+    "stock": 20,
+    "specs": {
+      "output": "5V",
+      "current": "1A"
+    },
+    "shortDesc": "LM variant 7805 Regulator TO-220",
+    "isFeatured": false
+  },
+  {
+    "id": "ic-ti-2",
+    "slug": "lm-317-adjustable-to-220",
+    "name": "LM 317 Adjustable TO-220",
+    "categoryId": "cat-ic",
+    "brand": "Texas Instruments",
+    "price": 12000,
+    "images": [
+      "https://picsum.photos/seed/lm-317-adjustable-to-220/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/lm-317-adjustable-to-220/640/480",
+    "stock": 27,
+    "specs": {
+      "output": "1.25–37V",
+      "current": "1.5A"
+    },
+    "shortDesc": "LM variant 317 Adjustable TO-220",
+    "isFeatured": false
+  },
+  {
+    "id": "ic-ti-3",
+    "slug": "lm-358-op-amp-soic-8",
+    "name": "LM 358 Op-Amp SOIC-8",
+    "categoryId": "cat-ic",
+    "brand": "Texas Instruments",
+    "price": 7000,
+    "images": [
+      "https://picsum.photos/seed/lm-358-op-amp-soic-8/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/lm-358-op-amp-soic-8/640/480",
+    "stock": 34,
+    "specs": {
+      "channels": "2",
+      "package": "SOIC-8"
+    },
+    "shortDesc": "LM variant 358 Op-Amp SOIC-8",
+    "isFeatured": false
+  },
+  {
+    "id": "ic-ti-4",
+    "slug": "lm-324-op-amp-dip-14",
+    "name": "LM 324 Op-Amp DIP-14",
+    "categoryId": "cat-ic",
+    "brand": "Texas Instruments",
+    "price": 8500,
+    "images": [
+      "https://picsum.photos/seed/lm-324-op-amp-dip-14/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/lm-324-op-amp-dip-14/640/480",
+    "stock": 41,
+    "specs": {
+      "channels": "4",
+      "package": "DIP-14"
+    },
+    "shortDesc": "LM variant 324 Op-Amp DIP-14",
+    "isFeatured": false
+  },
+  {
+    "id": "ic-ti-5",
+    "slug": "lm-555-timer-dip-8",
+    "name": "LM 555 Timer DIP-8",
+    "categoryId": "cat-ic",
+    "brand": "Texas Instruments",
+    "price": 6000,
+    "images": [
+      "https://picsum.photos/seed/lm-555-timer-dip-8/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/lm-555-timer-dip-8/640/480",
+    "stock": 48,
+    "specs": {
+      "package": "DIP-8"
+    },
+    "shortDesc": "LM variant 555 Timer DIP-8",
+    "isFeatured": true
+  },
+  {
+    "id": "res-1",
+    "slug": "resistor-1-4w-5-10-100-pcs",
+    "name": "Resistor 1/4W ±5% 10Ω (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 12000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-10-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-10-100-pcs/640/480",
+    "stock": 800,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "10Ω"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 10Ω (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-2",
+    "slug": "resistor-1-4w-5-47-100-pcs",
+    "name": "Resistor 1/4W ±5% 47Ω (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 12000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-47-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-47-100-pcs/640/480",
+    "stock": 900,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "47Ω"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 47Ω (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-3",
+    "slug": "resistor-1-4w-5-100-100-pcs",
+    "name": "Resistor 1/4W ±5% 100Ω (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 12000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-100-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-100-100-pcs/640/480",
+    "stock": 1000,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "100Ω"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 100Ω (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-4",
+    "slug": "resistor-1-4w-5-220-100-pcs",
+    "name": "Resistor 1/4W ±5% 220Ω (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 12000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-220-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-220-100-pcs/640/480",
+    "stock": 1000,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "220Ω"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 220Ω (100 pcs)",
+    "isFeatured": true
+  },
+  {
+    "id": "res-5",
+    "slug": "resistor-1-4w-5-330-100-pcs",
+    "name": "Resistor 1/4W ±5% 330Ω (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 12000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-330-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-330-100-pcs/640/480",
+    "stock": 950,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "330Ω"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 330Ω (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-6",
+    "slug": "resistor-1-4w-5-470-100-pcs",
+    "name": "Resistor 1/4W ±5% 470Ω (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 12000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-470-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-470-100-pcs/640/480",
+    "stock": 1000,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "470Ω"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 470Ω (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-7",
+    "slug": "resistor-1-4w-5-680-100-pcs",
+    "name": "Resistor 1/4W ±5% 680Ω (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 12000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-680-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-680-100-pcs/640/480",
+    "stock": 62,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "680Ω"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 680Ω (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-8",
+    "slug": "resistor-1-4w-5-1k-100-pcs",
+    "name": "Resistor 1/4W ±5% 1kΩ (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 13000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-1k-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-1k-100-pcs/640/480",
+    "stock": 69,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "1kΩ"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 1kΩ (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-9",
+    "slug": "resistor-1-4w-5-2-2k-100-pcs",
+    "name": "Resistor 1/4W ±5% 2.2kΩ (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 13000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-2-2k-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-2-2k-100-pcs/640/480",
+    "stock": 76,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "2.2kΩ"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 2.2kΩ (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-10",
+    "slug": "resistor-1-4w-5-3-3k-100-pcs",
+    "name": "Resistor 1/4W ±5% 3.3kΩ (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 13000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-3-3k-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-3-3k-100-pcs/640/480",
+    "stock": 83,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "3.3kΩ"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 3.3kΩ (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-11",
+    "slug": "resistor-1-4w-5-4-7k-100-pcs",
+    "name": "Resistor 1/4W ±5% 4.7kΩ (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 13000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-4-7k-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-4-7k-100-pcs/640/480",
+    "stock": 90,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "4.7kΩ"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 4.7kΩ (100 pcs)",
+    "isFeatured": true
+  },
+  {
+    "id": "res-12",
+    "slug": "resistor-1-4w-5-5-6k-100-pcs",
+    "name": "Resistor 1/4W ±5% 5.6kΩ (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 13000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-5-6k-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-5-6k-100-pcs/640/480",
+    "stock": 97,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "5.6kΩ"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 5.6kΩ (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-13",
+    "slug": "resistor-1-4w-5-10k-100-pcs",
+    "name": "Resistor 1/4W ±5% 10kΩ (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 14000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-10k-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-10k-100-pcs/640/480",
+    "stock": 104,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "10kΩ"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 10kΩ (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-14",
+    "slug": "resistor-1-4w-5-22k-100-pcs",
+    "name": "Resistor 1/4W ±5% 22kΩ (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 14000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-22k-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-22k-100-pcs/640/480",
+    "stock": 111,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "22kΩ"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 22kΩ (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-15",
+    "slug": "resistor-1-4w-5-33k-100-pcs",
+    "name": "Resistor 1/4W ±5% 33kΩ (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 14000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-33k-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-33k-100-pcs/640/480",
+    "stock": 118,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "33kΩ"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 33kΩ (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-16",
+    "slug": "resistor-1-4w-5-47k-100-pcs",
+    "name": "Resistor 1/4W ±5% 47kΩ (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 14000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-47k-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-47k-100-pcs/640/480",
+    "stock": 125,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "47kΩ"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 47kΩ (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-17",
+    "slug": "resistor-1-4w-5-68k-100-pcs",
+    "name": "Resistor 1/4W ±5% 68kΩ (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 15000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-68k-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-68k-100-pcs/640/480",
+    "stock": 132,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "68kΩ"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 68kΩ (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-18",
+    "slug": "resistor-1-4w-5-100k-100-pcs",
+    "name": "Resistor 1/4W ±5% 100kΩ (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 15000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-100k-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-100k-100-pcs/640/480",
+    "stock": 139,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "100kΩ"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 100kΩ (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-19",
+    "slug": "resistor-1-4w-5-220k-100-pcs",
+    "name": "Resistor 1/4W ±5% 220kΩ (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 15000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-220k-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-220k-100-pcs/640/480",
+    "stock": 146,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "220kΩ"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 220kΩ (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "res-20",
+    "slug": "resistor-1-4w-5-1m-100-pcs",
+    "name": "Resistor 1/4W ±5% 1MΩ (100 pcs)",
+    "categoryId": "cat-resistor",
+    "brand": "Yageo",
+    "price": 16000,
+    "images": [
+      "https://picsum.photos/seed/resistor-1-4w-5-1m-100-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/resistor-1-4w-5-1m-100-pcs/640/480",
+    "stock": 153,
+    "specs": {
+      "power": "0.25W",
+      "tolerance": "±5%",
+      "resistance": "1MΩ"
+    },
+    "shortDesc": "Resistor 1/4W ±5% variant 1MΩ (100 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "sns-1",
+    "slug": "sensor-dht11-temperature-humidity",
+    "name": "Sensor DHT11 Temperature & Humidity",
+    "categoryId": "cat-sensor",
+    "brand": "Generic",
+    "price": 19000,
+    "images": [
+      "https://picsum.photos/seed/sensor-dht11-temperature-humidity/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/sensor-dht11-temperature-humidity/640/480",
+    "stock": 20,
+    "specs": {
+      "type": "DHT11"
+    },
+    "shortDesc": "Sensor variant DHT11 Temperature & Humidity",
+    "isFeatured": true
+  },
+  {
+    "id": "sns-2",
+    "slug": "sensor-dht22-temperature-humidity",
+    "name": "Sensor DHT22 Temperature & Humidity",
+    "categoryId": "cat-sensor",
+    "brand": "Generic",
+    "price": 45000,
+    "images": [
+      "https://picsum.photos/seed/sensor-dht22-temperature-humidity/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/sensor-dht22-temperature-humidity/640/480",
+    "stock": 27,
+    "specs": {
+      "type": "DHT22"
+    },
+    "shortDesc": "Sensor variant DHT22 Temperature & Humidity",
+    "isFeatured": false
+  },
+  {
+    "id": "sns-3",
+    "slug": "sensor-hc-sr04-ultrasonic",
+    "name": "Sensor HC-SR04 Ultrasonic",
+    "categoryId": "cat-sensor",
+    "brand": "Generic",
+    "price": 25000,
+    "images": [
+      "https://picsum.photos/seed/sensor-hc-sr04-ultrasonic/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/sensor-hc-sr04-ultrasonic/640/480",
+    "stock": 34,
+    "specs": {
+      "range": "2–400cm"
+    },
+    "shortDesc": "Sensor variant HC-SR04 Ultrasonic",
+    "isFeatured": false
+  },
+  {
+    "id": "sns-4",
+    "slug": "sensor-mq-2-gas",
+    "name": "Sensor MQ-2 Gas",
+    "categoryId": "cat-sensor",
+    "brand": "Generic",
+    "price": 30000,
+    "images": [
+      "https://picsum.photos/seed/sensor-mq-2-gas/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/sensor-mq-2-gas/640/480",
+    "stock": 41,
+    "specs": {
+      "gas": "LPG, Smoke"
+    },
+    "shortDesc": "Sensor variant MQ-2 Gas",
+    "isFeatured": false
+  },
+  {
+    "id": "sns-5",
+    "slug": "sensor-mq-135-air-quality",
+    "name": "Sensor MQ-135 Air Quality",
+    "categoryId": "cat-sensor",
+    "brand": "Generic",
+    "price": 38000,
+    "images": [
+      "https://picsum.photos/seed/sensor-mq-135-air-quality/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/sensor-mq-135-air-quality/640/480",
+    "stock": 48,
+    "specs": {
+      "gas": "Air pollutants"
+    },
+    "shortDesc": "Sensor variant MQ-135 Air Quality",
+    "isFeatured": false
+  },
+  {
+    "id": "sns-6",
+    "slug": "sensor-pir-motion-hc-sr501",
+    "name": "Sensor PIR Motion HC-SR501",
+    "categoryId": "cat-sensor",
+    "brand": "Generic",
+    "price": 22000,
+    "images": [
+      "https://picsum.photos/seed/sensor-pir-motion-hc-sr501/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/sensor-pir-motion-hc-sr501/640/480",
+    "stock": 55,
+    "specs": {
+      "voltage": "5–20V"
+    },
+    "shortDesc": "Sensor variant PIR Motion HC-SR501",
+    "isFeatured": false
+  },
+  {
+    "id": "sns-7",
+    "slug": "sensor-mpu6050-6-dof",
+    "name": "Sensor MPU6050 6-DOF",
+    "categoryId": "cat-sensor",
+    "brand": "Generic",
+    "price": 35000,
+    "images": [
+      "https://picsum.photos/seed/sensor-mpu6050-6-dof/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/sensor-mpu6050-6-dof/640/480",
+    "stock": 62,
+    "specs": {
+      "interface": "I2C"
+    },
+    "shortDesc": "Sensor variant MPU6050 6-DOF",
+    "isFeatured": false
+  },
+  {
+    "id": "sns-8",
+    "slug": "sensor-bmp280-pressure",
+    "name": "Sensor BMP280 Pressure",
+    "categoryId": "cat-sensor",
+    "brand": "Generic",
+    "price": 42000,
+    "images": [
+      "https://picsum.photos/seed/sensor-bmp280-pressure/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/sensor-bmp280-pressure/640/480",
+    "stock": 69,
+    "specs": {
+      "interface": "I2C/SPI"
+    },
+    "shortDesc": "Sensor variant BMP280 Pressure",
+    "isFeatured": false
+  },
+  {
+    "id": "sns-9",
+    "slug": "sensor-ds18b20-temperature",
+    "name": "Sensor DS18B20 Temperature",
+    "categoryId": "cat-sensor",
+    "brand": "Generic",
+    "price": 28000,
+    "images": [
+      "https://picsum.photos/seed/sensor-ds18b20-temperature/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/sensor-ds18b20-temperature/640/480",
+    "stock": 76,
+    "specs": {
+      "interface": "1-Wire"
+    },
+    "shortDesc": "Sensor variant DS18B20 Temperature",
+    "isFeatured": false
+  },
+  {
+    "id": "sns-10",
+    "slug": "sensor-rc522-rfid-kit",
+    "name": "Sensor RC522 RFID Kit",
+    "categoryId": "cat-sensor",
+    "brand": "Generic",
+    "price": 39000,
+    "images": [
+      "https://picsum.photos/seed/sensor-rc522-rfid-kit/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/sensor-rc522-rfid-kit/640/480",
+    "stock": 83,
+    "specs": {
+      "freq": "13.56MHz"
+    },
+    "shortDesc": "Sensor variant RC522 RFID Kit",
+    "isFeatured": false
+  },
+  {
+    "id": "sns-11",
+    "slug": "sensor-gy-521-mpu-6050-breakout",
+    "name": "Sensor GY-521 MPU-6050 Breakout",
+    "categoryId": "cat-sensor",
+    "brand": "Generic",
+    "price": 33000,
+    "images": [
+      "https://picsum.photos/seed/sensor-gy-521-mpu-6050-breakout/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/sensor-gy-521-mpu-6050-breakout/640/480",
+    "stock": 90,
+    "specs": {
+      "interface": "I2C"
+    },
+    "shortDesc": "Sensor variant GY-521 MPU-6050 Breakout",
+    "isFeatured": false
+  },
+  {
+    "id": "sns-12",
+    "slug": "sensor-tcs3200-color",
+    "name": "Sensor TCS3200 Color",
+    "categoryId": "cat-sensor",
+    "brand": "Generic",
+    "price": 52000,
+    "images": [
+      "https://picsum.photos/seed/sensor-tcs3200-color/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/sensor-tcs3200-color/640/480",
+    "stock": 97,
+    "specs": {
+      "feature": "Color detection"
+    },
+    "shortDesc": "Sensor variant TCS3200 Color",
+    "isFeatured": false
+  },
+  {
+    "id": "pwr-1",
+    "slug": "dc-dc-module-buck-xl4015-5a",
+    "name": "DC-DC Module Buck XL4015 5A",
+    "categoryId": "cat-power",
+    "brand": "DIYmall",
+    "price": 45000,
+    "images": [
+      "https://picsum.photos/seed/dc-dc-module-buck-xl4015-5a/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/dc-dc-module-buck-xl4015-5a/640/480",
+    "stock": 20,
+    "specs": {
+      "type": "Buck",
+      "current": "5A"
+    },
+    "shortDesc": "DC-DC Module variant Buck XL4015 5A",
+    "isFeatured": true
+  },
+  {
+    "id": "pwr-2",
+    "slug": "dc-dc-module-buck-lm2596-3a",
+    "name": "DC-DC Module Buck LM2596 3A",
+    "categoryId": "cat-power",
+    "brand": "DIYmall",
+    "price": 35000,
+    "images": [
+      "https://picsum.photos/seed/dc-dc-module-buck-lm2596-3a/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/dc-dc-module-buck-lm2596-3a/640/480",
+    "stock": 27,
+    "specs": {
+      "type": "Buck",
+      "current": "3A"
+    },
+    "shortDesc": "DC-DC Module variant Buck LM2596 3A",
+    "isFeatured": false
+  },
+  {
+    "id": "pwr-3",
+    "slug": "dc-dc-module-boost-mt3608",
+    "name": "DC-DC Module Boost MT3608",
+    "categoryId": "cat-power",
+    "brand": "DIYmall",
+    "price": 30000,
+    "images": [
+      "https://picsum.photos/seed/dc-dc-module-boost-mt3608/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/dc-dc-module-boost-mt3608/640/480",
+    "stock": 34,
+    "specs": {
+      "type": "Boost",
+      "current": "2A"
+    },
+    "shortDesc": "DC-DC Module variant Boost MT3608",
+    "isFeatured": false
+  },
+  {
+    "id": "pwr-4",
+    "slug": "dc-dc-module-buck-boost-sepic",
+    "name": "DC-DC Module Buck-Boost SEPIC",
+    "categoryId": "cat-power",
+    "brand": "DIYmall",
+    "price": 65000,
+    "images": [
+      "https://picsum.photos/seed/dc-dc-module-buck-boost-sepic/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/dc-dc-module-buck-boost-sepic/640/480",
+    "stock": 41,
+    "specs": {
+      "type": "Buck-Boost"
+    },
+    "shortDesc": "DC-DC Module variant Buck-Boost SEPIC",
+    "isFeatured": false
+  },
+  {
+    "id": "pwr-5",
+    "slug": "dc-dc-module-adjustable-lm317-board",
+    "name": "DC-DC Module Adjustable LM317 Board",
+    "categoryId": "cat-power",
+    "brand": "DIYmall",
+    "price": 28000,
+    "images": [
+      "https://picsum.photos/seed/dc-dc-module-adjustable-lm317-board/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/dc-dc-module-adjustable-lm317-board/640/480",
+    "stock": 48,
+    "specs": {
+      "type": "Linear"
+    },
+    "shortDesc": "DC-DC Module variant Adjustable LM317 Board",
+    "isFeatured": false
+  },
+  {
+    "id": "pwr-6",
+    "slug": "dc-dc-module-ams1117-3-3-regulator",
+    "name": "DC-DC Module AMS1117-3.3 Regulator",
+    "categoryId": "cat-power",
+    "brand": "DIYmall",
+    "price": 10000,
+    "images": [
+      "https://picsum.photos/seed/dc-dc-module-ams1117-3-3-regulator/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/dc-dc-module-ams1117-3-3-regulator/640/480",
+    "stock": 55,
+    "specs": {
+      "type": "Linear",
+      "output": "3.3V"
+    },
+    "shortDesc": "DC-DC Module variant AMS1117-3.3 Regulator",
+    "isFeatured": false
+  },
+  {
+    "id": "pwr-7",
+    "slug": "dc-dc-module-ams1117-5-0-regulator",
+    "name": "DC-DC Module AMS1117-5.0 Regulator",
+    "categoryId": "cat-power",
+    "brand": "DIYmall",
+    "price": 10000,
+    "images": [
+      "https://picsum.photos/seed/dc-dc-module-ams1117-5-0-regulator/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/dc-dc-module-ams1117-5-0-regulator/640/480",
+    "stock": 62,
+    "specs": {
+      "type": "Linear",
+      "output": "5V"
+    },
+    "shortDesc": "DC-DC Module variant AMS1117-5.0 Regulator",
+    "isFeatured": false
+  },
+  {
+    "id": "pwr-8",
+    "slug": "dc-dc-module-power-bank-18650-5v-2a",
+    "name": "DC-DC Module Power Bank 18650 5V/2A",
+    "categoryId": "cat-power",
+    "brand": "DIYmall",
+    "price": 42000,
+    "images": [
+      "https://picsum.photos/seed/dc-dc-module-power-bank-18650-5v-2a/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/dc-dc-module-power-bank-18650-5v-2a/640/480",
+    "stock": 69,
+    "specs": {
+      "cells": "1x18650"
+    },
+    "shortDesc": "DC-DC Module variant Power Bank 18650 5V/2A",
+    "isFeatured": false
+  },
+  {
+    "id": "pwr-9",
+    "slug": "dc-dc-module-ups-5v-mini",
+    "name": "DC-DC Module UPS 5V Mini",
+    "categoryId": "cat-power",
+    "brand": "DIYmall",
+    "price": 89000,
+    "images": [
+      "https://picsum.photos/seed/dc-dc-module-ups-5v-mini/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/dc-dc-module-ups-5v-mini/640/480",
+    "stock": 76,
+    "specs": {
+      "backup": "Li-ion"
+    },
+    "shortDesc": "DC-DC Module variant UPS 5V Mini",
+    "isFeatured": false
+  },
+  {
+    "id": "pwr-10",
+    "slug": "dc-dc-module-bms-2s-10a",
+    "name": "DC-DC Module BMS 2S 10A",
+    "categoryId": "cat-power",
+    "brand": "DIYmall",
+    "price": 26000,
+    "images": [
+      "https://picsum.photos/seed/dc-dc-module-bms-2s-10a/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/dc-dc-module-bms-2s-10a/640/480",
+    "stock": 83,
+    "specs": {
+      "cells": "2S",
+      "current": "10A"
+    },
+    "shortDesc": "DC-DC Module variant BMS 2S 10A",
+    "isFeatured": false
+  },
+  {
+    "id": "pwr-11",
+    "slug": "dc-dc-module-bms-3s-20a",
+    "name": "DC-DC Module BMS 3S 20A",
+    "categoryId": "cat-power",
+    "brand": "DIYmall",
+    "price": 36000,
+    "images": [
+      "https://picsum.photos/seed/dc-dc-module-bms-3s-20a/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/dc-dc-module-bms-3s-20a/640/480",
+    "stock": 90,
+    "specs": {
+      "cells": "3S",
+      "current": "20A"
+    },
+    "shortDesc": "DC-DC Module variant BMS 3S 20A",
+    "isFeatured": false
+  },
+  {
+    "id": "pwr-12",
+    "slug": "dc-dc-module-step-down-9v-to-5v-usb",
+    "name": "DC-DC Module Step-down 9V to 5V USB",
+    "categoryId": "cat-power",
+    "brand": "DIYmall",
+    "price": 24000,
+    "images": [
+      "https://picsum.photos/seed/dc-dc-module-step-down-9v-to-5v-usb/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/dc-dc-module-step-down-9v-to-5v-usb/640/480",
+    "stock": 97,
+    "specs": {
+      "output": "5V USB"
+    },
+    "shortDesc": "DC-DC Module variant Step-down 9V to 5V USB",
+    "isFeatured": false
+  },
+  {
+    "id": "cap-1",
+    "slug": "electrolytic-capacitor-10uf-25v-10-pcs",
+    "name": "Electrolytic Capacitor 10uF 25V (10 pcs)",
+    "categoryId": "cat-capacitor",
+    "brand": "Nichicon",
+    "price": 12000,
+    "images": [
+      "https://picsum.photos/seed/electrolytic-capacitor-10uf-25v-10-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/electrolytic-capacitor-10uf-25v-10-pcs/640/480",
+    "stock": 20,
+    "specs": {
+      "type": "Electrolytic",
+      "capacitance": "10uF",
+      "voltage": "25V"
+    },
+    "shortDesc": "Electrolytic Capacitor variant 10uF 25V (10 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "cap-2",
+    "slug": "electrolytic-capacitor-22uf-25v-10-pcs",
+    "name": "Electrolytic Capacitor 22uF 25V (10 pcs)",
+    "categoryId": "cat-capacitor",
+    "brand": "Nichicon",
+    "price": 12000,
+    "images": [
+      "https://picsum.photos/seed/electrolytic-capacitor-22uf-25v-10-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/electrolytic-capacitor-22uf-25v-10-pcs/640/480",
+    "stock": 27,
+    "specs": {
+      "type": "Electrolytic",
+      "capacitance": "22uF",
+      "voltage": "25V"
+    },
+    "shortDesc": "Electrolytic Capacitor variant 22uF 25V (10 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "cap-3",
+    "slug": "electrolytic-capacitor-47uf-25v-10-pcs",
+    "name": "Electrolytic Capacitor 47uF 25V (10 pcs)",
+    "categoryId": "cat-capacitor",
+    "brand": "Nichicon",
+    "price": 13000,
+    "images": [
+      "https://picsum.photos/seed/electrolytic-capacitor-47uf-25v-10-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/electrolytic-capacitor-47uf-25v-10-pcs/640/480",
+    "stock": 34,
+    "specs": {
+      "type": "Electrolytic",
+      "capacitance": "47uF",
+      "voltage": "25V"
+    },
+    "shortDesc": "Electrolytic Capacitor variant 47uF 25V (10 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "cap-4",
+    "slug": "electrolytic-capacitor-100uf-25v-10-pcs",
+    "name": "Electrolytic Capacitor 100uF 25V (10 pcs)",
+    "categoryId": "cat-capacitor",
+    "brand": "Nichicon",
+    "price": 14000,
+    "images": [
+      "https://picsum.photos/seed/electrolytic-capacitor-100uf-25v-10-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/electrolytic-capacitor-100uf-25v-10-pcs/640/480",
+    "stock": 41,
+    "specs": {
+      "type": "Electrolytic",
+      "capacitance": "100uF",
+      "voltage": "25V"
+    },
+    "shortDesc": "Electrolytic Capacitor variant 100uF 25V (10 pcs)",
+    "isFeatured": true
+  },
+  {
+    "id": "cap-5",
+    "slug": "electrolytic-capacitor-220uf-25v-10-pcs",
+    "name": "Electrolytic Capacitor 220uF 25V (10 pcs)",
+    "categoryId": "cat-capacitor",
+    "brand": "Nichicon",
+    "price": 16000,
+    "images": [
+      "https://picsum.photos/seed/electrolytic-capacitor-220uf-25v-10-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/electrolytic-capacitor-220uf-25v-10-pcs/640/480",
+    "stock": 48,
+    "specs": {
+      "type": "Electrolytic",
+      "capacitance": "220uF",
+      "voltage": "25V"
+    },
+    "shortDesc": "Electrolytic Capacitor variant 220uF 25V (10 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "cap-6",
+    "slug": "electrolytic-capacitor-470uf-25v-10-pcs",
+    "name": "Electrolytic Capacitor 470uF 25V (10 pcs)",
+    "categoryId": "cat-capacitor",
+    "brand": "Nichicon",
+    "price": 19000,
+    "images": [
+      "https://picsum.photos/seed/electrolytic-capacitor-470uf-25v-10-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/electrolytic-capacitor-470uf-25v-10-pcs/640/480",
+    "stock": 55,
+    "specs": {
+      "type": "Electrolytic",
+      "capacitance": "470uF",
+      "voltage": "25V"
+    },
+    "shortDesc": "Electrolytic Capacitor variant 470uF 25V (10 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "cap-7",
+    "slug": "electrolytic-capacitor-1000uf-25v-10-pcs",
+    "name": "Electrolytic Capacitor 1000uF 25V (10 pcs)",
+    "categoryId": "cat-capacitor",
+    "brand": "Nichicon",
+    "price": 26000,
+    "images": [
+      "https://picsum.photos/seed/electrolytic-capacitor-1000uf-25v-10-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/electrolytic-capacitor-1000uf-25v-10-pcs/640/480",
+    "stock": 62,
+    "specs": {
+      "type": "Electrolytic",
+      "capacitance": "1000uF",
+      "voltage": "25V"
+    },
+    "shortDesc": "Electrolytic Capacitor variant 1000uF 25V (10 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "cap-8",
+    "slug": "electrolytic-capacitor-10uf-50v-10-pcs",
+    "name": "Electrolytic Capacitor 10uF 50V (10 pcs)",
+    "categoryId": "cat-capacitor",
+    "brand": "Nichicon",
+    "price": 15000,
+    "images": [
+      "https://picsum.photos/seed/electrolytic-capacitor-10uf-50v-10-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/electrolytic-capacitor-10uf-50v-10-pcs/640/480",
+    "stock": 69,
+    "specs": {
+      "type": "Electrolytic",
+      "capacitance": "10uF",
+      "voltage": "50V"
+    },
+    "shortDesc": "Electrolytic Capacitor variant 10uF 50V (10 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "cap-9",
+    "slug": "electrolytic-capacitor-47uf-50v-10-pcs",
+    "name": "Electrolytic Capacitor 47uF 50V (10 pcs)",
+    "categoryId": "cat-capacitor",
+    "brand": "Nichicon",
+    "price": 17000,
+    "images": [
+      "https://picsum.photos/seed/electrolytic-capacitor-47uf-50v-10-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/electrolytic-capacitor-47uf-50v-10-pcs/640/480",
+    "stock": 76,
+    "specs": {
+      "type": "Electrolytic",
+      "capacitance": "47uF",
+      "voltage": "50V"
+    },
+    "shortDesc": "Electrolytic Capacitor variant 47uF 50V (10 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "cap-10",
+    "slug": "electrolytic-capacitor-100uf-50v-10-pcs",
+    "name": "Electrolytic Capacitor 100uF 50V (10 pcs)",
+    "categoryId": "cat-capacitor",
+    "brand": "Nichicon",
+    "price": 22000,
+    "images": [
+      "https://picsum.photos/seed/electrolytic-capacitor-100uf-50v-10-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/electrolytic-capacitor-100uf-50v-10-pcs/640/480",
+    "stock": 83,
+    "specs": {
+      "type": "Electrolytic",
+      "capacitance": "100uF",
+      "voltage": "50V"
+    },
+    "shortDesc": "Electrolytic Capacitor variant 100uF 50V (10 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "cap-11",
+    "slug": "electrolytic-capacitor-220uf-50v-10-pcs",
+    "name": "Electrolytic Capacitor 220uF 50V (10 pcs)",
+    "categoryId": "cat-capacitor",
+    "brand": "Nichicon",
+    "price": 26000,
+    "images": [
+      "https://picsum.photos/seed/electrolytic-capacitor-220uf-50v-10-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/electrolytic-capacitor-220uf-50v-10-pcs/640/480",
+    "stock": 90,
+    "specs": {
+      "type": "Electrolytic",
+      "capacitance": "220uF",
+      "voltage": "50V"
+    },
+    "shortDesc": "Electrolytic Capacitor variant 220uF 50V (10 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "cap-12",
+    "slug": "electrolytic-capacitor-470uf-50v-10-pcs",
+    "name": "Electrolytic Capacitor 470uF 50V (10 pcs)",
+    "categoryId": "cat-capacitor",
+    "brand": "Nichicon",
+    "price": 32000,
+    "images": [
+      "https://picsum.photos/seed/electrolytic-capacitor-470uf-50v-10-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/electrolytic-capacitor-470uf-50v-10-pcs/640/480",
+    "stock": 97,
+    "specs": {
+      "type": "Electrolytic",
+      "capacitance": "470uF",
+      "voltage": "50V"
+    },
+    "shortDesc": "Electrolytic Capacitor variant 470uF 50V (10 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "cap-13",
+    "slug": "electrolytic-capacitor-1uf-10-pcs-film",
+    "name": "Electrolytic Capacitor 1uF (10 pcs) Film",
+    "categoryId": "cat-capacitor",
+    "brand": "Nichicon",
+    "price": 12000,
+    "images": [
+      "https://picsum.photos/seed/electrolytic-capacitor-1uf-10-pcs-film/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/electrolytic-capacitor-1uf-10-pcs-film/640/480",
+    "stock": 104,
+    "specs": {
+      "type": "Film",
+      "capacitance": "1uF"
+    },
+    "shortDesc": "Electrolytic Capacitor variant 1uF (10 pcs) Film",
+    "isFeatured": false
+  },
+  {
+    "id": "cap-14",
+    "slug": "electrolytic-capacitor-100nf-100-pcs-ceramic",
+    "name": "Electrolytic Capacitor 100nF (100 pcs) Ceramic",
+    "categoryId": "cat-capacitor",
+    "brand": "Nichicon",
+    "price": 18000,
+    "images": [
+      "https://picsum.photos/seed/electrolytic-capacitor-100nf-100-pcs-ceramic/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/electrolytic-capacitor-100nf-100-pcs-ceramic/640/480",
+    "stock": 111,
+    "specs": {
+      "type": "Ceramic",
+      "capacitance": "100nF"
+    },
+    "shortDesc": "Electrolytic Capacitor variant 100nF (100 pcs) Ceramic",
+    "isFeatured": false
+  },
+  {
+    "id": "cap-15",
+    "slug": "electrolytic-capacitor-1nf-100-pcs-ceramic",
+    "name": "Electrolytic Capacitor 1nF (100 pcs) Ceramic",
+    "categoryId": "cat-capacitor",
+    "brand": "Nichicon",
+    "price": 17000,
+    "images": [
+      "https://picsum.photos/seed/electrolytic-capacitor-1nf-100-pcs-ceramic/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/electrolytic-capacitor-1nf-100-pcs-ceramic/640/480",
+    "stock": 118,
+    "specs": {
+      "type": "Ceramic",
+      "capacitance": "1nF"
+    },
+    "shortDesc": "Electrolytic Capacitor variant 1nF (100 pcs) Ceramic",
+    "isFeatured": false
+  },
+  {
+    "id": "led-1",
+    "slug": "led-5mm-red-50-pcs",
+    "name": "LED 5mm Red (50 pcs)",
+    "categoryId": "cat-led",
+    "brand": "Everlight",
+    "price": 14000,
+    "images": [
+      "https://picsum.photos/seed/led-5mm-red-50-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/led-5mm-red-50-pcs/640/480",
+    "stock": 20,
+    "specs": {
+      "color": "Red"
+    },
+    "shortDesc": "LED 5mm variant Red (50 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "led-2",
+    "slug": "led-5mm-green-50-pcs",
+    "name": "LED 5mm Green (50 pcs)",
+    "categoryId": "cat-led",
+    "brand": "Everlight",
+    "price": 14000,
+    "images": [
+      "https://picsum.photos/seed/led-5mm-green-50-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/led-5mm-green-50-pcs/640/480",
+    "stock": 27,
+    "specs": {
+      "color": "Green"
+    },
+    "shortDesc": "LED 5mm variant Green (50 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "led-3",
+    "slug": "led-5mm-blue-50-pcs",
+    "name": "LED 5mm Blue (50 pcs)",
+    "categoryId": "cat-led",
+    "brand": "Everlight",
+    "price": 15000,
+    "images": [
+      "https://picsum.photos/seed/led-5mm-blue-50-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/led-5mm-blue-50-pcs/640/480",
+    "stock": 34,
+    "specs": {
+      "color": "Blue"
+    },
+    "shortDesc": "LED 5mm variant Blue (50 pcs)",
+    "isFeatured": true
+  },
+  {
+    "id": "led-4",
+    "slug": "led-5mm-yellow-50-pcs",
+    "name": "LED 5mm Yellow (50 pcs)",
+    "categoryId": "cat-led",
+    "brand": "Everlight",
+    "price": 14000,
+    "images": [
+      "https://picsum.photos/seed/led-5mm-yellow-50-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/led-5mm-yellow-50-pcs/640/480",
+    "stock": 41,
+    "specs": {
+      "color": "Yellow"
+    },
+    "shortDesc": "LED 5mm variant Yellow (50 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "led-5",
+    "slug": "led-5mm-white-50-pcs",
+    "name": "LED 5mm White (50 pcs)",
+    "categoryId": "cat-led",
+    "brand": "Everlight",
+    "price": 16000,
+    "images": [
+      "https://picsum.photos/seed/led-5mm-white-50-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/led-5mm-white-50-pcs/640/480",
+    "stock": 48,
+    "specs": {
+      "color": "White"
+    },
+    "shortDesc": "LED 5mm variant White (50 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "led-6",
+    "slug": "led-5mm-rgb-common-anode-10-pcs",
+    "name": "LED 5mm RGB (Common Anode 10 pcs)",
+    "categoryId": "cat-led",
+    "brand": "Everlight",
+    "price": 28000,
+    "images": [
+      "https://picsum.photos/seed/led-5mm-rgb-common-anode-10-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/led-5mm-rgb-common-anode-10-pcs/640/480",
+    "stock": 55,
+    "specs": {
+      "color": "RGB"
+    },
+    "shortDesc": "LED 5mm variant RGB (Common Anode 10 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "led-7",
+    "slug": "led-5mm-ir-940nm-20-pcs",
+    "name": "LED 5mm IR 940nm (20 pcs)",
+    "categoryId": "cat-led",
+    "brand": "Everlight",
+    "price": 22000,
+    "images": [
+      "https://picsum.photos/seed/led-5mm-ir-940nm-20-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/led-5mm-ir-940nm-20-pcs/640/480",
+    "stock": 62,
+    "specs": {
+      "color": "IR 940nm"
+    },
+    "shortDesc": "LED 5mm variant IR 940nm (20 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "led-8",
+    "slug": "led-5mm-uv-395nm-10-pcs",
+    "name": "LED 5mm UV 395nm (10 pcs)",
+    "categoryId": "cat-led",
+    "brand": "Everlight",
+    "price": 35000,
+    "images": [
+      "https://picsum.photos/seed/led-5mm-uv-395nm-10-pcs/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/led-5mm-uv-395nm-10-pcs/640/480",
+    "stock": 69,
+    "specs": {
+      "color": "UV 395nm"
+    },
+    "shortDesc": "LED 5mm variant UV 395nm (10 pcs)",
+    "isFeatured": false
+  },
+  {
+    "id": "led-strp-1",
+    "slug": "led-strip-ws2812b-1m-60-leds",
+    "name": "LED Strip WS2812B 1m (60 LEDs)",
+    "categoryId": "cat-led",
+    "brand": "Generic",
+    "price": 69000,
+    "images": [
+      "https://picsum.photos/seed/led-strip-ws2812b-1m-60-leds/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/led-strip-ws2812b-1m-60-leds/640/480",
+    "stock": 20,
+    "specs": {
+      "type": "Addressable"
+    },
+    "shortDesc": "LED Strip variant WS2812B 1m (60 LEDs)",
+    "isFeatured": false
+  },
+  {
+    "id": "led-strp-2",
+    "slug": "led-strip-ws2812b-5m-300-leds",
+    "name": "LED Strip WS2812B 5m (300 LEDs)",
+    "categoryId": "cat-led",
+    "brand": "Generic",
+    "price": 299000,
+    "images": [
+      "https://picsum.photos/seed/led-strip-ws2812b-5m-300-leds/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/led-strip-ws2812b-5m-300-leds/640/480",
+    "stock": 27,
+    "specs": {
+      "type": "Addressable"
+    },
+    "shortDesc": "LED Strip variant WS2812B 5m (300 LEDs)",
+    "isFeatured": true
+  },
+  {
+    "id": "led-strp-3",
+    "slug": "led-strip-3528-5m-warm-white",
+    "name": "LED Strip 3528 5m Warm White",
+    "categoryId": "cat-led",
+    "brand": "Generic",
+    "price": 85000,
+    "images": [
+      "https://picsum.photos/seed/led-strip-3528-5m-warm-white/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/led-strip-3528-5m-warm-white/640/480",
+    "stock": 34,
+    "specs": {
+      "type": "Non-addressable"
+    },
+    "shortDesc": "LED Strip variant 3528 5m Warm White",
+    "isFeatured": false
+  },
+  {
+    "id": "led-strp-4",
+    "slug": "led-strip-5050-5m-rgb",
+    "name": "LED Strip 5050 5m RGB",
+    "categoryId": "cat-led",
+    "brand": "Generic",
+    "price": 139000,
+    "images": [
+      "https://picsum.photos/seed/led-strip-5050-5m-rgb/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/led-strip-5050-5m-rgb/640/480",
+    "stock": 41,
+    "specs": {
+      "type": "Non-addressable"
+    },
+    "shortDesc": "LED Strip variant 5050 5m RGB",
+    "isFeatured": false
+  },
+  {
+    "id": "mot-1",
+    "slug": "dc-motor-6v-mini",
+    "name": "DC Motor 6V Mini",
+    "categoryId": "cat-motor",
+    "brand": "Generic",
+    "price": 29000,
+    "images": [
+      "https://picsum.photos/seed/dc-motor-6v-mini/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/dc-motor-6v-mini/640/480",
+    "stock": 20,
+    "specs": {
+      "voltage": "6V"
+    },
+    "shortDesc": "DC Motor variant 6V Mini",
+    "isFeatured": false
+  },
+  {
+    "id": "mot-2",
+    "slug": "dc-motor-12v-high-torque",
+    "name": "DC Motor 12V High Torque",
+    "categoryId": "cat-motor",
+    "brand": "Generic",
+    "price": 79000,
+    "images": [
+      "https://picsum.photos/seed/dc-motor-12v-high-torque/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/dc-motor-12v-high-torque/640/480",
+    "stock": 27,
+    "specs": {
+      "voltage": "12V"
+    },
+    "shortDesc": "DC Motor variant 12V High Torque",
+    "isFeatured": false
+  },
+  {
+    "id": "mot-3",
+    "slug": "dc-motor-12v-with-gearbox",
+    "name": "DC Motor 12V with Gearbox",
+    "categoryId": "cat-motor",
+    "brand": "Generic",
+    "price": 99000,
+    "images": [
+      "https://picsum.photos/seed/dc-motor-12v-with-gearbox/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/dc-motor-12v-with-gearbox/640/480",
+    "stock": 34,
+    "specs": {
+      "voltage": "12V",
+      "gear": "1:48"
+    },
+    "shortDesc": "DC Motor variant 12V with Gearbox",
+    "isFeatured": false
+  },
+  {
+    "id": "mot-servo-1",
+    "slug": "servo-sg90-9g",
+    "name": "Servo SG90 9g",
+    "categoryId": "cat-motor",
+    "brand": "TowerPro",
+    "price": 45000,
+    "images": [
+      "https://picsum.photos/seed/servo-sg90-9g/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/servo-sg90-9g/640/480",
+    "stock": 20,
+    "specs": {
+      "torque": "1.8kg·cm"
+    },
+    "shortDesc": "Servo variant SG90 9g",
+    "isFeatured": true
+  },
+  {
+    "id": "mot-servo-2",
+    "slug": "servo-mg90s-metal",
+    "name": "Servo MG90S Metal",
+    "categoryId": "cat-motor",
+    "brand": "TowerPro",
+    "price": 79000,
+    "images": [
+      "https://picsum.photos/seed/servo-mg90s-metal/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/servo-mg90s-metal/640/480",
+    "stock": 27,
+    "specs": {
+      "torque": "2.2kg·cm"
+    },
+    "shortDesc": "Servo variant MG90S Metal",
+    "isFeatured": false
+  },
+  {
+    "id": "mot-servo-3",
+    "slug": "servo-mg996r",
+    "name": "Servo MG996R",
+    "categoryId": "cat-motor",
+    "brand": "TowerPro",
+    "price": 119000,
+    "images": [
+      "https://picsum.photos/seed/servo-mg996r/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/servo-mg996r/640/480",
+    "stock": 34,
+    "specs": {
+      "torque": "10kg·cm"
+    },
+    "shortDesc": "Servo variant MG996R",
+    "isFeatured": false
+  },
+  {
+    "id": "mot-step-1",
+    "slug": "stepper-28byj-48-uln2003",
+    "name": "Stepper 28BYJ-48 + ULN2003",
+    "categoryId": "cat-motor",
+    "brand": "Generic",
+    "price": 59000,
+    "images": [
+      "https://picsum.photos/seed/stepper-28byj-48-uln2003/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/stepper-28byj-48-uln2003/640/480",
+    "stock": 20,
+    "specs": {
+      "step": "64:1"
+    },
+    "shortDesc": "Stepper variant 28BYJ-48 + ULN2003",
+    "isFeatured": false
+  },
+  {
+    "id": "mot-step-2",
+    "slug": "stepper-nema17",
+    "name": "Stepper NEMA17",
+    "categoryId": "cat-motor",
+    "brand": "Generic",
+    "price": 199000,
+    "images": [
+      "https://picsum.photos/seed/stepper-nema17/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/stepper-nema17/640/480",
+    "stock": 27,
+    "specs": {
+      "step": "1.8°"
+    },
+    "shortDesc": "Stepper variant NEMA17",
+    "isFeatured": false
+  },
+  {
+    "id": "mot-step-3",
+    "slug": "stepper-nema17-high-torque",
+    "name": "Stepper NEMA17 High Torque",
+    "categoryId": "cat-motor",
+    "brand": "Generic",
+    "price": 289000,
+    "images": [
+      "https://picsum.photos/seed/stepper-nema17-high-torque/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/stepper-nema17-high-torque/640/480",
+    "stock": 34,
+    "specs": {
+      "step": "1.8°",
+      "torque": "59N·cm"
+    },
+    "shortDesc": "Stepper variant NEMA17 High Torque",
+    "isFeatured": false
+  },
+  {
+    "id": "mcu-1",
+    "slug": "arduino-board-uno-r3",
+    "name": "Arduino Board UNO R3",
+    "categoryId": "cat-mcu",
+    "brand": "Arduino",
+    "price": 139000,
+    "images": [
+      "https://picsum.photos/seed/arduino-board-uno-r3/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/arduino-board-uno-r3/640/480",
+    "stock": 20,
+    "specs": {
+      "mcu": "ATmega328P"
+    },
+    "shortDesc": "Arduino Board variant UNO R3",
+    "isFeatured": true
+  },
+  {
+    "id": "mcu-2",
+    "slug": "arduino-board-nano-v3",
+    "name": "Arduino Board Nano V3",
+    "categoryId": "cat-mcu",
+    "brand": "Arduino",
+    "price": 115000,
+    "images": [
+      "https://picsum.photos/seed/arduino-board-nano-v3/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/arduino-board-nano-v3/640/480",
+    "stock": 27,
+    "specs": {
+      "mcu": "ATmega328P"
+    },
+    "shortDesc": "Arduino Board variant Nano V3",
+    "isFeatured": false
+  },
+  {
+    "id": "mcu-3",
+    "slug": "arduino-board-mega-2560",
+    "name": "Arduino Board Mega 2560",
+    "categoryId": "cat-mcu",
+    "brand": "Arduino",
+    "price": 199000,
+    "images": [
+      "https://picsum.photos/seed/arduino-board-mega-2560/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/arduino-board-mega-2560/640/480",
+    "stock": 34,
+    "specs": {
+      "mcu": "ATmega2560"
+    },
+    "shortDesc": "Arduino Board variant Mega 2560",
+    "isFeatured": false
+  },
+  {
+    "id": "mcu-4",
+    "slug": "arduino-board-pro-mini-5v-16mhz",
+    "name": "Arduino Board Pro Mini 5V/16MHz",
+    "categoryId": "cat-mcu",
+    "brand": "Arduino",
+    "price": 89000,
+    "images": [
+      "https://picsum.photos/seed/arduino-board-pro-mini-5v-16mhz/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/arduino-board-pro-mini-5v-16mhz/640/480",
+    "stock": 41,
+    "specs": {
+      "mcu": "ATmega328P"
+    },
+    "shortDesc": "Arduino Board variant Pro Mini 5V/16MHz",
+    "isFeatured": false
+  },
+  {
+    "id": "mcu-esp-1",
+    "slug": "esp-devkit-esp8266-nodemcu",
+    "name": "ESP DevKit ESP8266 NodeMCU",
+    "categoryId": "cat-mcu",
+    "brand": "Espressif",
+    "price": 89000,
+    "images": [
+      "https://picsum.photos/seed/esp-devkit-esp8266-nodemcu/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/esp-devkit-esp8266-nodemcu/640/480",
+    "stock": 20,
+    "specs": {
+      "wifi": "2.4GHz"
+    },
+    "shortDesc": "ESP DevKit variant ESP8266 NodeMCU",
+    "isFeatured": false
+  },
+  {
+    "id": "mcu-esp-2",
+    "slug": "esp-devkit-esp32-wroom-32",
+    "name": "ESP DevKit ESP32-WROOM-32",
+    "categoryId": "cat-mcu",
+    "brand": "Espressif",
+    "price": 129000,
+    "images": [
+      "https://picsum.photos/seed/esp-devkit-esp32-wroom-32/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/esp-devkit-esp32-wroom-32/640/480",
+    "stock": 27,
+    "specs": {
+      "wifi": "2.4GHz",
+      "bt": "BLE"
+    },
+    "shortDesc": "ESP DevKit variant ESP32-WROOM-32",
+    "isFeatured": true
+  },
+  {
+    "id": "mcu-esp-3",
+    "slug": "esp-devkit-esp32-c3",
+    "name": "ESP DevKit ESP32-C3",
+    "categoryId": "cat-mcu",
+    "brand": "Espressif",
+    "price": 119000,
+    "images": [
+      "https://picsum.photos/seed/esp-devkit-esp32-c3/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/esp-devkit-esp32-c3/640/480",
+    "stock": 34,
+    "specs": {
+      "wifi": "2.4GHz",
+      "bt": "BLE5"
+    },
+    "shortDesc": "ESP DevKit variant ESP32-C3",
+    "isFeatured": false
+  },
+  {
+    "id": "mcu-st-1",
+    "slug": "stm32-board-blue-pill-f103c8t6",
+    "name": "STM32 Board Blue Pill F103C8T6",
+    "categoryId": "cat-mcu",
+    "brand": "ST",
+    "price": 99000,
+    "images": [
+      "https://picsum.photos/seed/stm32-board-blue-pill-f103c8t6/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/stm32-board-blue-pill-f103c8t6/640/480",
+    "stock": 20,
+    "specs": {
+      "core": "Cortex-M3"
+    },
+    "shortDesc": "STM32 Board variant Blue Pill F103C8T6",
+    "isFeatured": false
+  },
+  {
+    "id": "mcu-st-2",
+    "slug": "stm32-board-black-pill-f411ceu6",
+    "name": "STM32 Board Black Pill F411CEU6",
+    "categoryId": "cat-mcu",
+    "brand": "ST",
+    "price": 159000,
+    "images": [
+      "https://picsum.photos/seed/stm32-board-black-pill-f411ceu6/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/stm32-board-black-pill-f411ceu6/640/480",
+    "stock": 27,
+    "specs": {
+      "core": "Cortex-M4"
+    },
+    "shortDesc": "STM32 Board variant Black Pill F411CEU6",
+    "isFeatured": false
+  },
+  {
+    "id": "mcu-st-3",
+    "slug": "stm32-board-nucleo-f303k8",
+    "name": "STM32 Board Nucleo-F303K8",
+    "categoryId": "cat-mcu",
+    "brand": "ST",
+    "price": 199000,
+    "images": [
+      "https://picsum.photos/seed/stm32-board-nucleo-f303k8/640/480"
+    ],
+    "thumbnail": "https://picsum.photos/seed/stm32-board-nucleo-f303k8/640/480",
+    "stock": 34,
+    "specs": {
+      "core": "Cortex-M4"
+    },
+    "shortDesc": "STM32 Board variant Nucleo-F303K8",
+    "isFeatured": false
+  }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "productId": "ic-1",
+      "userName": "Nguyễn Văn A",
+      "rating": 5,
+      "comment": "Sản phẩm rất tốt!"
+    },
+    {
+      "id": 2,
+      "productId": "ic-1",
+      "userName": "Trần Thị B",
+      "rating": 4,
+      "comment": "Khá hài lòng."
+    }
+  ]
+}
