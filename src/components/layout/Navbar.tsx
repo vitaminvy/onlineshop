@@ -41,7 +41,7 @@ export default function Navbar() {
               to="/"
               className="whitespace-nowrap text-xl font-bold text-primary"
             >
-              Misumi-like
+              onlineShop
             </Link>
 
             {/* Desktop search (large pill) */}
